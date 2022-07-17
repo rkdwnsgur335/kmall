@@ -31,7 +31,7 @@ public class MemberController {
 		
 		log.info("회원정보 : " + vo);
 		
-		memservice.join(vo);
+//		memservice.join(vo);
 
 		
 		return "redirect:/member/join";

@@ -5,11 +5,18 @@
 <html>
 <head>
     <title>How To create Sign Up and Registration Form HTML Using Bootstrap 4</title>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" ></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" ></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../resources/css/joinstyle.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 </head>
+<script>
+
+
+</script>
 <body>
 <div class="container row" style="float: none; margin:auto;">
  <div class="col-md-4" style="float: none; margin:0 auto;">
@@ -22,10 +29,7 @@
           <div class="input-group mb-3">
 			  <div class="input-group-prepend">
 			  </div>
-			  <input type="text" class="form-control has-invalid" placeholder="ID입력" name="mem_id" id="mem_id">
-         <div class="valid-feedback">
-          	 사용가능한 닉네임 입니다.
-         </div>
+			  <input type="text" class="form-control" placeholder="ID입력" name="mem_id" id="mem_id">
          <div class="invalid-feedback">
             	이메일 형식으로 작성해주세요.
          </div>
@@ -34,13 +38,16 @@
       		<div class="input-group mb-3">
 			  <div class="input-group-prepend">
 			  </div>
-			  <input type="password" class="form-control" placeholder="PW입력" name="mem_pw" id="mem_id">
+			  <input type="password" class="form-control" placeholder="PW입력" name="mem_pw" id="mem_pw">
 		    </div>
 		    
 		    <div class="input-group mb-3">
 			  <div class="input-group-prepend">
 			  </div>
-			  <input type="password" class="form-control" placeholder="PW확인">
+			  <input type="password" class="form-control" placeholder="PW확인" id="mem_psw">
+         <div class="invalid-feedback">
+            	비밀번호와 똑같이 입력해주세요.
+         </div>
 		    </div>
 		    
 		    <div class="input-group mb-3">
@@ -75,14 +82,13 @@
 			  <input type="text" class="form-control" placeholder="상세주소 입력" name="mem_addr_d" id="sample6_detailAddress">
 			  <input type="hidden" id="sample6_extraAddress" placeholder="참고항목">
 		    </div>
+		    
 		 
           <div class="form-group mb-3">
             <label class="term-policy"><input type="checkbox" name="mem_accept_e" value="Y">메일 수신 동의</label>
           </div>
           
-          <form id="submitForm">
-          <button type="submit" id="submitbtn"  class="btn btn-outline-dark">Signup</button>
-          </form>
+          <button type="button" id="submitbtn"  class="btn btn-outline-dark">Signup</button>
           
           <hr>
           <div class="form-group">
@@ -145,29 +151,54 @@
 
 <script>
 
-//닉네임의 유효성 여부를 저장할 변수를 만들고 초기값 false 부여
-let isNickValid=/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+//닉네임의 유효성 여부를 저장할 변수
+var regExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{3,}))$/;
 
+let idjoin=false;
+
+		//아이디(이메일 형식) 유효성 검사 
 		document.querySelector("#mem_id").addEventListener("input", function(){
 		    //1. 입력한 value 값을 읽어온다.
-		    let inputNick=this.value;
-		    //2. 유효하다면 input 요소에 is-valid 클래스 추가, 아니라면 is-invalid 클래스 추가
-		    if(isNickValid.test(inputNick)){
-		       this.classList.remove("is-invalid");
-		       this.classList.add("is-valid");
-		    }else{
-		       this.classList.remove("is-valid");
+		    let inputMail=this.value;
+		    //2. 유효하지 않다면 input요소에 is-invalid추가, 유효하다면 is-invalid제거
+		    if(!regExp.test(inputMail)){
 		       this.classList.add("is-invalid");
+               return idjoin=false;
+		    }else{
+		       this.classList.remove("is-invalid");
+               return idjoin=true;
 		    }
-		    
-		    
-		    document.querySelector("#submitbtn").addEventListener("submit", function(e){
+
+});
+
+		
+	    $(document).ready(function(){
+
+	        $('#submitbtn').on('click',function(){
+
+                if(idjoin == false){
+                    alert("이메일 형식으로 ID를 입력해주세요.");
+                    event.defaultPrevented();
+                }
+
+                console.log("통과");
+
+	        });
+	});
+	    
+	    document.querySelector("#mem_psw").addEventListener("input", function(){
+            let inputpw= $('#mem_pw').val();
+		    let inputpsw=this.value;
+
+		    if(inputpw!=inputpsw){
+		       this.classList.add("is-invalid");
+               return pwjoin=false;
+		    }else{
+		       this.classList.remove("is-invalid");
+               return pwjoin=true;
 		    }
- });
- 
 
- });
-
+});	    
 
 </script>
 </html>
