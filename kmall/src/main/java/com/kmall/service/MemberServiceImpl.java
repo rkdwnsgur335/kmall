@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kmall.domain.MemberVO;
+import com.kmall.dto.LoginDTO;
 import com.kmall.mapper.MemberMapper;
 
 import lombok.Setter;
@@ -19,6 +20,12 @@ public class MemberServiceImpl implements MemberService {
 		
 		mapper.join(vo);
 		
+	}
+
+	@Override
+	public MemberVO login_ok(LoginDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.login_ok(dto);
 	}
 
 }

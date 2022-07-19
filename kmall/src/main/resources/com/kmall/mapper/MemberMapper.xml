@@ -9,5 +9,14 @@ INSERT INTO MEMBER_TBL
 		( #{mem_id},#{mem_pw},#{mem_name}, #{mem_phone},#{mem_zipcode},#{mem_addr},#{mem_addr_d},#{mem_accept_e})
 </insert>
 
+<select id="login_ok" parameterType="com.kmall.dto.LoginDTO" resultType="com.kmall.domain.MemberVO">
+
+		SELECT MEM_ID, MEM_NAME, MEM_PW, MEM_EMAIL, MEM_ZIPCODE, MEM_ADDR, MEM_ADDR_D, MEM_PHONE, 
+			MEM_NICK, MEM_ACCEPT_E, MEM_POINT, MEM_DATE_SUB, MEM_DATE_UP, MEM_DATE_LAST, MEM_AUTHCODE
+		FROM MEMBER_TBL 
+		WHERE MEM_ID = #{mem_id}
+
+</select>
+
 
 </mapper>

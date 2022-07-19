@@ -10,8 +10,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../resources/css/joinstyle.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <%@include file="/WEB-INF/views/include/navigation.jsp" %>
 </head>
 <script>
 
@@ -21,11 +21,10 @@
 <div class="container row" style="float: none; margin:auto;">
  <div class="col-md-4" style="float: none; margin:0 auto;">
         <!-- Sign Up form -->
-        <form id="joinForm" action="join" method="post" class="Signup">
-          <h3>회원가입</h3>
-            
-  
-          
+        <form id="joinForm" action="join" method="post" class="Signup mt-5">
+          <h3 style="text-align: center">회원가입</h3>
+            <hr>
+ 
           <div class="input-group mb-3">
 			  <div class="input-group-prepend">
 			  </div>
@@ -88,7 +87,7 @@
             <label class="term-policy"><input type="checkbox" name="mem_accept_e" value="Y">메일 수신 동의</label>
           </div>
           
-          <button type="button" id="submitbtn"  class="btn btn-outline-dark">Signup</button>
+          <button type="button" id="submitbtn"  class="btn btn-outline-dark btn-block">Signup</button>
           
           <hr>
           <div class="form-group">

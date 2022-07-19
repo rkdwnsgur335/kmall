@@ -1,12 +1,16 @@
 package com.kmall.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kmall.domain.MemberVO;
+import com.kmall.dto.LoginDTO;
 import com.kmall.service.MemberService;
 
 import lombok.Setter;
@@ -40,6 +44,46 @@ public class MemberController {
 	@GetMapping("/login")
 	public void login() {
 		
+	}
+	
+	@PostMapping("/login")
+	public String login(LoginDTO dto,RedirectAttributes rttr, HttpSession session) throws Exception {
+		
+		log.info("로그인정보 : " + dto);
+		
+		String url = "";
+		String msg = "";
+		
+		MemberVO vo = memservice.login_ok(dto);
+		
+		if(vo != null) { //아이디 존재
+			
+			//1)비번일치
+			
+			String passwd = dto.getMem_pw();
+			String db_passwd = vo.getMem_pw();
+			
+			
+			
+			if(passwd.equalsIgnoreCase(db_passwd)) {
+				//로그인 성공
+				url = "/";
+				session.setAttribute("loginStatus", vo);
+				msg = "loginSuccess";
+			}else {
+				//비밀번호 불일치
+				url = "/member/login";
+				msg="passwdFailure";
+			}
+			
+		}else { //아이디 불일치
+			url = "/member/login";
+			msg = "idFailure";
+		}
+		
+		rttr.addFlashAttribute("msg", msg);
+		
+		return "redirect:" + url;
 	}
 	
 }
