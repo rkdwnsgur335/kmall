@@ -46,7 +46,11 @@
     </style>
 
     
-    <!-- Custom styles for this template -->
+    <script>
+    	if('${msg}' == 'logout' ){
+    		alert("로그아웃 되었습니다.");
+    	}
+    </script>
   </head>
   <body>
     

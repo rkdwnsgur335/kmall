@@ -4,7 +4,7 @@
 
 <insert id="join" parameterType="com.kmall.domain.MemberVO">
 INSERT INTO MEMBER_TBL
-		( MEM_ID, MEM_PW, MEM_NAME,MEM_PHONE, MEM_ZIPCODE, MEM_ADDR, MEM_ADDR_D, MEM_ACCEPT_E )
+		( MEM_ID, MEM_PW, MEM_NAME,MEM_PHONE, MEM_ZIPCODE, MEM_ADDR, MEM_ADDR_D, MEM_ACCEPT_E)
 		VALUES
 		( #{mem_id},#{mem_pw},#{mem_name}, #{mem_phone},#{mem_zipcode},#{mem_addr},#{mem_addr_d},#{mem_accept_e})
 </insert>

@@ -27,8 +27,8 @@
     <div id="content" style="width: 350px;">
     <img class="logo" src="images/logo.png" alt="로고이미지삽입">
         <form id="loginForm" action="login" method="post">
-			<input type="email" class="form-control mb-3" id="mem_id" placeholder="EmailID">
-		    <input type="password" class="form-control mb-3" id="mem_pw" placeholder="password">
+			<input type="text" class="form-control mb-3" id="mem_id" name="mem_id" placeholder="EmailID">
+		    <input type="password" class="form-control mb-3" id="mem_pw" name="mem_pw" placeholder="password">
 		    <div class="form-check mb-3">
 			  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
 			  <label class="form-check-label" for="defaultCheck1">

@@ -155,6 +155,11 @@ var regExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[
 
 let idjoin=false;
 
+		
+			
+		
+		
+
 		//아이디(이메일 형식) 유효성 검사 
 		document.querySelector("#mem_id").addEventListener("input", function(){
 		    //1. 입력한 value 값을 읽어온다.
@@ -172,6 +177,20 @@ let idjoin=false;
 
 		
 	    $(document).ready(function(){
+	    	
+	    	$("#submitbtn").on("click", function(){
+				
+				if($("#mem_id").val() == "") {
+					alert("아이디를 입력하세요");
+					$("#mem_id").focus();
+					return;
+				}
+			
+			});
+	    	
+	    	
+	    	
+	    	
 
 	        $('#submitbtn').on('click',function(e){
 

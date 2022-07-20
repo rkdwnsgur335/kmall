@@ -39,7 +39,7 @@ public class MemberController {
 		
 		log.info("회원정보 : " + vo);
 		
-//		memservice.join(vo);
+		memservice.join(vo);
 
 		
 		return "redirect:/";
@@ -71,7 +71,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("/login")
-	public String login(LoginDTO dto,RedirectAttributes rttr, HttpSession session) throws Exception {
+	public String login_ok(LoginDTO dto,RedirectAttributes rttr, HttpSession session) throws Exception {
 		
 		log.info("로그인정보 : " + dto);
 		
@@ -108,6 +108,16 @@ public class MemberController {
 		rttr.addFlashAttribute("msg", msg);
 		 
 		return "redirect:" + url;
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session, RedirectAttributes rttr) {
+		
+		session.invalidate();
+		
+		rttr.addFlashAttribute("msg", "logout");
+		
+		return "redirect:/";
 	}
 	
 }
