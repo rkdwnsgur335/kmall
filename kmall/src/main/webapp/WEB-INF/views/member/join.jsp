@@ -87,11 +87,11 @@
             <label class="term-policy"><input type="checkbox" name="mem_accept_e" value="Y">메일 수신 동의</label>
           </div>
           
-          <button type="button" id="submitbtn"  class="btn btn-outline-dark btn-block">Signup</button>
+          <button type="submit" id="submitbtn"  class="btn btn-outline-dark btn-block">Signup</button>
           
           <hr>
           <div class="form-group">
-            <p class="not-yet">Already have an account? <a href="#">Login</a></p>
+            <p class="not-yet">Already have an account? <a href="/member/login">Login</a></p>
           </div>
         </form>
     </div>
@@ -173,11 +173,11 @@ let idjoin=false;
 		
 	    $(document).ready(function(){
 
-	        $('#submitbtn').on('click',function(){
+	        $('#submitbtn').on('click',function(e){
 
                 if(idjoin == false){
                     alert("이메일 형식으로 ID를 입력해주세요.");
-                    event.defaultPrevented();
+                    e.preventDefault();
                 }
 
                 console.log("통과");

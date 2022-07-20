@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">Kmall</a>
+  <a class="navbar-brand" href="/">LOGO</a>
 
   <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo02">
     <ul class="navbar-nav">
