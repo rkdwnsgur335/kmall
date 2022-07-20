@@ -1,5 +1,7 @@
 package com.kmall.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +23,20 @@ public class MemberServiceImpl implements MemberService {
 		mapper.join(vo);
 		
 	}
+	
+	@Override
+	public String idCheck(String mem_id) {
+		// TODO Auto-generated method stub
+		return mapper.idCheck(mem_id);
+	}
+	
 
 	@Override
 	public MemberVO login_ok(LoginDTO dto) {
 		// TODO Auto-generated method stub
 		return mapper.login_ok(dto);
 	}
+
+
 
 }

@@ -3,10 +3,14 @@ package com.kmall.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kmall.domain.MemberVO;
@@ -38,8 +42,28 @@ public class MemberController {
 //		memservice.join(vo);
 
 		
-		return "redirect:/member/join";
+		return "redirect:/";
 	}
+	
+	@ResponseBody
+	@GetMapping("/idCheck")
+	public ResponseEntity<String> idCheck(@RequestParam("mem_id") String mem_id){
+		
+		ResponseEntity<String> entity = null;
+		
+		String isUseID = "";
+		
+		if(memservice.idCheck(mem_id) != null) {
+			isUseID = "no";
+		}else {
+			isUseID = "yes";
+		}
+		
+		entity = new ResponseEntity<String>(isUseID, HttpStatus.OK);
+		
+		return entity;
+	}
+	
 	
 	@GetMapping("/login")
 	public void login() {
@@ -58,7 +82,7 @@ public class MemberController {
 		
 		if(vo != null) { //아이디 존재
 			
-			//1)비번일치
+			//비번일치
 			
 			String passwd = dto.getMem_pw();
 			String db_passwd = vo.getMem_pw();
