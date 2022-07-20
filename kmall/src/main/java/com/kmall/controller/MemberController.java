@@ -82,7 +82,7 @@ public class MemberController {
 		}
 		
 		rttr.addFlashAttribute("msg", msg);
-		
+		 
 		return "redirect:" + url;
 	}
 	
