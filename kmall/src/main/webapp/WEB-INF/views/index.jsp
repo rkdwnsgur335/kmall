@@ -10,12 +10,15 @@
     <meta name="generator" content="Hugo 0.88.1">
     <title>Product example · Bootstrap v4.6</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/product/">
+
 
     
-
-    <!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+<!-- CSS -->
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
 
 
     <!-- Favicons -->
@@ -43,6 +46,21 @@
           font-size: 3.5rem;
         }
       }
+      
+      .carousel-inner{
+        width:auto;
+        height:400px; /* 이미지 높이 변경 */
+      }
+      .carousel-item{
+        width: auto;
+        height:100%;
+      }
+      .mainimg {
+        display:block;
+        width: auto;
+        height: 100%;
+      }
+
     </style>
 
     
@@ -50,22 +68,41 @@
     	if('${msg}' == 'logout' ){
     		alert("로그아웃 되었습니다.");
     	}
+    	
+    	$('.carousel').carousel({
+    		  interval: 2000
+    		})
     </script>
+    
   </head>
   <body>
-    
+<!-- https://velog.io/@dain-choi/%EC%B2%AB-%ED%99%94%EB%A9%B4-%EB%A7%8C%EB%93%A4%EA%B8%B02 -->
 <!-- header -->
 <%@include file="/WEB-INF/views/include/navigation.jsp" %>
-<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
-  <div class="col-md-5 p-lg-5 mx-auto my-5">
-    <h1 class="display-4 font-weight-normal">Punny headline</h1>
-    <p class="lead font-weight-normal">And an even wittier subheading to boot. Jumpstart your marketing efforts with this example based on Apple’s marketing pages.</p>
-    <a class="btn btn-outline-secondary" href="#">Coming soon</a>
-  </div>
-  <div class="product-device shadow-sm d-none d-md-block"></div>
-  <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
-</div>
 
+
+<!-- body -->
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="/resources/img/mainimg1.jpg" class="mainimg d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="/resources/img/mainimg2.jpg"  class="mainimg d-block w-100" alt="..." >
+    </div>
+    <div class="carousel-item">
+      <img src="/resources/img/mainimg3.jpg" class="mainimg d-block w-100" alt="..." >
+    </div>
+  </div>
+ <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-target="#carouselExampleControls" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </button>
+</div>
 
 <footer class="container py-5">
   <div class="row">
