@@ -16,9 +16,15 @@
 <!-- CSS -->
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 <!-- JavaScript Bundle with Popper -->
+<<<<<<< HEAD
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" ></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" ></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+=======
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+>>>>>>> refs/remotes/origin/master
 
 
     <!-- Favicons -->
@@ -45,6 +51,7 @@
           font-size: 3.5rem;
         }
       }
+<<<<<<< HEAD
 
       
 .banner {
@@ -66,6 +73,23 @@
 		width: 100%;
       }
       
+=======
+      
+      .carousel-inner{
+        width:auto;
+        height:400px; /* 이미지 높이 변경 */
+      }
+      .carousel-item{
+        width: auto;
+        height:100%;
+      }
+      .mainimg {
+        display:block;
+        width: auto;
+        height: 100%;
+      }
+
+>>>>>>> refs/remotes/origin/master
     </style>
 
     
@@ -84,6 +108,7 @@
 <!-- https://velog.io/@dain-choi/%EC%B2%AB-%ED%99%94%EB%A9%B4-%EB%A7%8C%EB%93%A4%EA%B8%B02 -->
 <!-- header -->
 <%@include file="/WEB-INF/views/include/navigation.jsp" %>
+<<<<<<< HEAD
 
 
 <!-- body -->
@@ -108,10 +133,84 @@
     <span class="sr-only">Next</span>
   </button>
 </div>
+=======
+>>>>>>> refs/remotes/origin/master
 
 
+<<<<<<< HEAD
 <!-- footer -->
 <%@include file="/WEB-INF/views/include/footer.jsp" %>
+=======
+<!-- body -->
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="/resources/img/mainimg1.jpg" class="mainimg d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="/resources/img/mainimg2.jpg"  class="mainimg d-block w-100" alt="..." >
+    </div>
+    <div class="carousel-item">
+      <img src="/resources/img/mainimg3.jpg" class="mainimg d-block w-100" alt="..." >
+    </div>
+  </div>
+ <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-target="#carouselExampleControls" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </button>
+</div>
+
+<footer class="container py-5">
+  <div class="row">
+    <div class="col-12 col-md">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mb-2" role="img" viewBox="0 0 24 24" focusable="false"><title>Product</title><circle cx="12" cy="12" r="10"/><path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/></svg>
+      <small class="d-block mb-3 text-muted">&copy; 2017-2021</small>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Features</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="text-muted" href="#">Cool stuff</a></li>
+        <li><a class="text-muted" href="#">Random feature</a></li>
+        <li><a class="text-muted" href="#">Team feature</a></li>
+        <li><a class="text-muted" href="#">Stuff for developers</a></li>
+        <li><a class="text-muted" href="#">Another one</a></li>
+        <li><a class="text-muted" href="#">Last time</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Resources</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="text-muted" href="#">Resource</a></li>
+        <li><a class="text-muted" href="#">Resource name</a></li>
+        <li><a class="text-muted" href="#">Another resource</a></li>
+        <li><a class="text-muted" href="#">Final resource</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Resources</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="text-muted" href="#">Business</a></li>
+        <li><a class="text-muted" href="#">Education</a></li>
+        <li><a class="text-muted" href="#">Government</a></li>
+        <li><a class="text-muted" href="#">Gaming</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>About</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="text-muted" href="#">Team</a></li>
+        <li><a class="text-muted" href="#">Locations</a></li>
+        <li><a class="text-muted" href="#">Privacy</a></li>
+        <li><a class="text-muted" href="#">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+>>>>>>> refs/remotes/origin/master
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
 
