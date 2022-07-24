@@ -37,6 +37,12 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.login_ok(dto);
 	}
 
+	@Override
+	public String resultID(String mem_phone) {
+		// TODO Auto-generated method stub
+		return mapper.resultID(mem_phone);
+	}
+
 
 
 }

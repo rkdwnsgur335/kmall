@@ -8,11 +8,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="/resources/css/login.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" >
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <title>Login Page</title>
+    <!-- header -->
     <%@include file="/WEB-INF/views/include/navigation.jsp" %>
+    
+    <style type="text/css">
+
+    </style>
+    
+    <!-- 검사 -->
     <script>
     	let msg = "${msg}";
     	if(msg == "idFailure"){
@@ -29,8 +36,8 @@
         <form id="loginForm" action="login" method="post">
 			<input type="text" class="form-control mb-3" id="mem_id" name="mem_id" placeholder="EmailID">
 		    <input type="password" class="form-control mb-3" id="mem_pw" name="mem_pw" placeholder="password">
-		    <div class="form-check mb-3">
-			  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+		    <div class="form-check mb-3 col-lg-6">
+			  <input class="form-check-input text-left" type="checkbox" id="defaultCheck1">
 			  <label class="form-check-label" for="defaultCheck1">
 			    	로그인 유지하기
 			  </label>
@@ -38,7 +45,7 @@
             <button type="submit" class="btn btn-dark btn-block">로그인</button>
         </form>
         <div class="find_info"><br>
-            <a id="find_id" href="#">아이디 찾기</a><a> |</a>
+            <a id="find_id" href="/member/searchID">아이디 찾기</a><a> |</a>
             <a id="find_password" href="#">비밀번호 찾기</a><a> |</a>
             <a id="go_join" href="/member/join">회원가입</a><br><br>
             <a class="sub_font_style" href="#"><b style="color:#7b7b7b">개인정보처리방침</b></a><br>
@@ -46,6 +53,8 @@
         </div>
         <p id="copyright">Copyright © Jun All Rights Reserved.</p>
     </div>
+    <!-- footer -->
+    <%@include file="/WEB-INF/views/include/footer.jsp" %>
     <script>
 
 		/* 로그인 */
@@ -75,12 +84,9 @@
 			return true;
 		});
 
-
 		
-
 	});
-
-
+		
 	</script>
 </body>
 

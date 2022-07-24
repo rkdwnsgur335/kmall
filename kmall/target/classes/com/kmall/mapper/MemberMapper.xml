@@ -26,5 +26,13 @@ INSERT INTO MEMBER_TBL
 
 </select>
 
+<select id="resultID" resultType="string">
+	
+		SELECT MEM_ID
+		FROM MEMBER_TBL
+		WHERE MEM_PHONE = #{mem_phone}
+		
+	</select>
+
 
 </mapper>

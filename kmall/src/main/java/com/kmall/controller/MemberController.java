@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,12 +29,13 @@ public class MemberController {
 	@Setter(onMethod_ = {@Autowired} )
 	private MemberService memservice;
 	
-	//로그인 폼
+	//회원가입 폼
 	@GetMapping("/join")
 	public void join() {
 		
 	}
 	
+	//회원가입 기능
 	@PostMapping("/join")
 	public String join(MemberVO vo) {
 		
@@ -45,6 +47,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	//아이디 중복 체크
 	@ResponseBody
 	@GetMapping("/idCheck")
 	public ResponseEntity<String> idCheck(@RequestParam("mem_id") String mem_id){
@@ -64,12 +67,13 @@ public class MemberController {
 		return entity;
 	}
 	
-	
+	//로그인 폼
 	@GetMapping("/login")
 	public void login() {
 		
 	}
 	
+	//로그인 기능
 	@PostMapping("/login")
 	public String login_ok(LoginDTO dto,RedirectAttributes rttr, HttpSession session) throws Exception {
 		
@@ -110,6 +114,7 @@ public class MemberController {
 		return "redirect:" + url;
 	}
 	
+	//로그아웃 기능
 	@GetMapping("/logout")
 	public String logout(HttpSession session, RedirectAttributes rttr) {
 		
@@ -120,4 +125,29 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	//ID찾기 폼
+	@GetMapping("/searchID")
+	public void searchID() {
+	}
+	
+	//ID찾기 기능
+	@PostMapping("/resultID")
+	public String resultID(@RequestParam("mem_phone") String mem_phone,Model model) {
+		
+		log.info("전화번호: " + mem_phone);
+		
+		String mem_id = memservice.resultID(mem_phone);
+		
+		String url = "";
+		
+		if(mem_id != null) {
+			model.addAttribute("mem_id", mem_id);
+			url = "/member/resultID";
+		}else {
+			url = "/member/resultID";
+		}
+		
+		
+		return url;
+	}
 }
