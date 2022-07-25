@@ -16,9 +16,15 @@
 <!-- CSS -->
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 <!-- JavaScript Bundle with Popper -->
+<<<<<<< HEAD
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+=======
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+>>>>>>> refs/remotes/origin/master
 
 
     <!-- Favicons -->
@@ -40,12 +46,34 @@
         -ms-user-select: none;
         user-select: none;
       }
-
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
         }
       }
+<<<<<<< HEAD
+
+      
+.banner {
+
+}
+      
+      
+      .inner_item{
+
+      }
+      
+       .img_box{
+
+       
+       }
+      
+      .banner_img {
+		height: 480px;
+		width: 100%;
+      }
+      
+=======
       
       .carousel-inner{
         width:auto;
@@ -61,6 +89,7 @@
         height: 100%;
       }
 
+>>>>>>> refs/remotes/origin/master
     </style>
 
     
@@ -79,8 +108,39 @@
 <!-- https://velog.io/@dain-choi/%EC%B2%AB-%ED%99%94%EB%A9%B4-%EB%A7%8C%EB%93%A4%EA%B8%B02 -->
 <!-- header -->
 <%@include file="/WEB-INF/views/include/navigation.jsp" %>
+<<<<<<< HEAD
 
 
+<!-- body -->
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner inner_item">
+    <div class="carousel-item active img_box">
+      <img src="/resources/img/mainimg1.jpg" class="banner_img d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item img_box">
+      <img src="/resources/img/mainimg1.jpg"  class="banner_img d-block w-100" alt="..." >
+    </div>
+    <div class="carousel-item img_box">
+      <img src="/resources/img/mainimg1.jpg" class="banner_img d-block w-100" alt="..." >
+    </div>
+  </div>
+ <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-target="#carouselExampleControls" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </button>
+</div>
+=======
+>>>>>>> refs/remotes/origin/master
+
+
+<<<<<<< HEAD
+<!-- footer -->
+<%@include file="/WEB-INF/views/include/footer.jsp" %>
+=======
 <!-- body -->
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
@@ -150,9 +210,9 @@
     </div>
   </div>
 </footer>
+>>>>>>> refs/remotes/origin/master
 
-
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
 
       
   </body>
