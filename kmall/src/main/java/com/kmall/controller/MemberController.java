@@ -1,5 +1,7 @@
 package com.kmall.controller;
 
+import java.util.UUID;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kmall.domain.MemberVO;
+import com.kmall.dto.EmailDTO;
 import com.kmall.dto.LoginDTO;
 import com.kmall.service.MemberService;
 
@@ -28,6 +31,7 @@ public class MemberController {
 	
 	@Setter(onMethod_ = {@Autowired} )
 	private MemberService memservice;
+	
 	
 	//회원가입 폼
 	@GetMapping("/join")
@@ -150,4 +154,51 @@ public class MemberController {
 		
 		return url;
 	}
+	
+	//PW찾기 폼
+	@GetMapping("/searchPW")
+	public void searchPW() {
+	}
+	
+	
+	
+	//임시비밀번호 발급(PW찾기 기능)
+	@PostMapping("/searchImsiPW")
+	public String searchImsiPW(@RequestParam("mem_id") String mem_id,@RequestParam("mem_phone") String mem_phone, Model model, RedirectAttributes rttr) {
+		
+		//db에서 아이디와 핸드폰 번호 존재여부 확인.
+		String db_mem_id = memservice.getIDEmailExists(mem_id, mem_phone);
+		String temp_mem_pw = "";
+		
+		String url = "";
+		
+		
+		if(db_mem_id != null) {
+			
+			//임시 비밀번호 생성
+			UUID uid = UUID.randomUUID();
+			temp_mem_pw = uid.toString().substring(0, 6); // 0 ~ 5 까지의 문자열
+			
+			log.info("임시비밀번호: " + temp_mem_pw); // 임시 비밀번호 데이터 들어오나 확인
+			
+			//임시 비밀번호 db에 저장
+			memservice.changePW(db_mem_id, temp_mem_pw);
+			
+			//메일보내기
+			EmailDTO dto = new EmailDTO("Kmall", "Kmall", mem_id, "Kmall 임시 비밀번호입니다.", "");
+			
+			try {
+				
+				
+				
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+			
+		}
+		
+		
+		return "";
+	}
+	
 }

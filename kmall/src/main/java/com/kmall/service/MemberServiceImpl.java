@@ -43,6 +43,19 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.resultID(mem_phone);
 	}
 
+	@Override
+	public String getIDEmailExists(String mem_id, String mem_phone) {
+		// TODO Auto-generated method stub
+		return mapper.getIDEmailExists(mem_id, mem_phone);
+	}
+
+	@Override
+	public void changePW(String mem_id, String mem_pw) {
+		// TODO Auto-generated method stub
+		mapper.changePW(mem_id, mem_pw);
+		
+	}
+
 
 
 }
