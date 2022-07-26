@@ -1,7 +1,5 @@
 package com.kmall.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +39,19 @@ public class MemberServiceImpl implements MemberService {
 	public String resultID(String mem_phone) {
 		// TODO Auto-generated method stub
 		return mapper.resultID(mem_phone);
+	}
+
+	@Override
+	public String getIDEmailExists(String mem_id, String mem_phone) {
+		// TODO Auto-generated method stub
+		return mapper.getIDEmailExists(mem_id, mem_phone);
+	}
+
+	@Override
+	public void changePW(String mem_id, String mem_pw) {
+		// TODO Auto-generated method stub
+		mapper.changePW(mem_id, mem_pw);
+		
 	}
 
 

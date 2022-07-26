@@ -18,11 +18,13 @@
 <body>
     <div id="content" style="width: 350px;">
     <br>
-    <h3 style="margin-bottom: 20px;">이메일 아이디 찾기</h3><hr>
-    <p>가입시 등록한 휴대폰 번호를 입력해주세요.</p>
-        <form id="loginForm" action="resultID" method="post">
+    <h3 style="margin-bottom: 20px;">임시 비밀번호 발급</h3><hr>
+    <p>이메일아이디와 휴대폰 번호를 입력해주세요.</p>
+    <p>해당 이메일로 임시비밀번호를 발급 해드립니다.</p>
+        <form id="SearchPWForm" action="resultPW" method="post">
+			<input type="text" class="form-control mt-4" id="mem_id" name="mem_id" placeholder="이메일 아이디 입력">
 			<input type="text" class="form-control mt-4" id="mem_phone" name="mem_phone" placeholder="핸드폰 번호 입력">
-            <button type="submit" class="btn btn-dark btn-block mt-4">이메일 아이디 찾기</button>
+            <button type="submit" class="btn btn-dark btn-block mt-4">임시 비밀번호 발급</button>
         </form>
     </div>
         <!-- footer -->

@@ -1,10 +1,13 @@
 package com.kmall.controller;
 
+import java.util.UUID;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.MailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kmall.domain.MemberVO;
+import com.kmall.dto.EmailDTO;
 import com.kmall.dto.LoginDTO;
+import com.kmall.service.EmailService;
 import com.kmall.service.MemberService;
 
 import lombok.Setter;
@@ -26,8 +31,11 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class MemberController {
 	
-	@Setter(onMethod_ = {@Autowired} )
+	@Setter(onMethod_ = {@Autowired})
 	private MemberService memservice;
+	
+	@Setter(onMethod_ = {@Autowired})
+	private EmailService mailservice;
 	
 	//회원가입 폼
 	@GetMapping("/join")
@@ -150,4 +158,54 @@ public class MemberController {
 		
 		return url;
 	}
+	
+	//PW찾기 폼
+	@GetMapping("/searchPW")
+	public void searchPW() {
+	}
+	
+	
+	
+	//임시비밀번호 발급(PW찾기 기능)
+	@PostMapping("/resultPW")
+	public String resultPW(@RequestParam("mem_id") String mem_id,@RequestParam("mem_phone") String mem_phone, Model model, RedirectAttributes rttr) {
+		
+		//db에서 아이디와 핸드폰 번호 존재여부 확인.
+		String db_mem_id = memservice.getIDEmailExists(mem_id, mem_phone);
+		String temp_mem_pw = "";
+		
+		String url = "";
+		
+		
+		if(db_mem_id != null) {
+			
+			//임시 비밀번호 생성
+			UUID uid = UUID.randomUUID();
+			temp_mem_pw = uid.toString().substring(0, 6); // 0 ~ 5 까지의 문자열
+			
+			log.info("임시비밀번호: " + temp_mem_pw); // 임시 비밀번호 데이터 들어오나 확인
+			
+			//임시 비밀번호 db에 저장
+			memservice.changePW(db_mem_id, temp_mem_pw);
+			
+			//메일보내기
+			EmailDTO dto = new EmailDTO("Kmall", "Kmall", mem_id, "Kmall 임시 비밀번호입니다.", "");
+			
+			try {
+			mailservice.sendMail(dto, temp_mem_pw);
+			model.addAttribute("mem_id",db_mem_id);
+			url = "/member/resultPW";
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+			
+		}else {
+			model.addAttribute("mem_id",db_mem_id);
+			url = "/member/resultPW";
+		}
+		
+		
+		return url;
+	}
+	
 }

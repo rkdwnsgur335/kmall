@@ -19,16 +19,16 @@
 <body>
     <div id="content" style="width: 350px;">
     <br>
-    <h3 style="margin-bottom: 20px;">이메일 찾기 결과</h3><hr>
+    <h3 style="margin-bottom: 20px;">비밀번호 찾기 결과</h3><hr>
     <c:if test="${mem_id != null }">
-    	<p>해당 번호로 가입된 아이디는</p><br>
-    	<p>****${fn:substring(mem_id,4,fn:length(mem_id)) }입니다.</p>
+    	<p>해당 이메일로 임시 비밀번호를 발급하였습니다.</p>
     	<button type="submit" class="btn btn-dark btn-block mt-4" onclick="location.href='/member/login'">로그인 하러 가기</button>
     </c:if>
     
     <c:if test="${mem_id == null }">
-    	<p>해당번호로 가입된 아이디가 존재하지 않습니다.</p><br>
-    	<button type="submit" class="btn btn-dark btn-block mt-4" onclick="location.href='/member/searchID'">뒤로 가기</button>
+    	<p>해당 이메일이나 핸드폰 번호로 가입된</p> 
+    	<p>아이디가 존재하지 않습니다.</p>
+    	<button type="submit" class="btn btn-dark btn-block mt-4" onclick="location.href='/member/searchPW'">뒤로 가기</button>
     </c:if>
     </div>
         <!-- footer -->

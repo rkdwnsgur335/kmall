@@ -46,7 +46,7 @@
         </form>
         <div class="find_info"><br>
             <a id="find_id" href="/member/searchID">아이디 찾기</a><a> |</a>
-            <a id="find_password" href="#">비밀번호 찾기</a><a> |</a>
+            <a id="find_password" href="/member/searchPW">비밀번호 찾기</a><a> |</a>
             <a id="go_join" href="/member/join">회원가입</a><br><br>
             <a class="sub_font_style" href="#"><b style="color:#7b7b7b">개인정보처리방침</b></a><br>
             <a class="question" href="#">회원 정보 문의: admin@site.net</a>
