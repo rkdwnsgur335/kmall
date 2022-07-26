@@ -30,7 +30,7 @@
           <div class="input-group mb-3">
 			  <div class="input-group-prepend">
 			  </div>
-			  <input type="text" class="form-control" placeholder="ID입력" name="mem_id" id="mem_id">
+			  <input type="text" class="form-control" placeholder="수신 가능한 이메일로 입력" name="mem_id" id="mem_id">
          <div class="invalid-feedback">
             	이메일 형식으로 작성해주세요.
          </div>
