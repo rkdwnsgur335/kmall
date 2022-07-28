@@ -21,4 +21,6 @@ public interface MemberMapper {
 	// 임시 비밀번호로 변경
 	void changePW(@Param("mem_id") String mem_id,@Param("mem_pw") String mem_pw);
 	
+	void modify(MemberVO vo);
+	
 }
