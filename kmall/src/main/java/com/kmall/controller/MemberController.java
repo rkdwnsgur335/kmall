@@ -208,4 +208,34 @@ public class MemberController {
 		return url;
 	}
 	
+	// 회원정보수정을 위한 비밀번호 재확인 폼.
+	@GetMapping("/confirmPW")
+	public void confirmPW() {
+		
+	}
+	
+	// 회원정보 수정을 위한 비밀번호 재확인.
+	@PostMapping("/confirmPW")
+	public String confirmPW(@RequestParam("mem_pw") String mem_pw, HttpSession session, RedirectAttributes rttr) {
+		
+		String url = "";
+		
+		String mem_id = ((MemberVO) session.getAttribute("loginStatus")).getMem_id();
+		
+		LoginDTO dto = new LoginDTO(mem_id, mem_pw);
+		
+		MemberVO vo = memservice.login_ok(dto);
+		
+		String db_passwd = vo.getMem_pw();
+		
+		if(mem_pw.equals(db_passwd)) {
+			url = "member/modify";
+		}else {
+			url = "member/confirmPW";
+			rttr.addFlashAttribute("msg", "noPW");
+		}
+		
+		return "redirect:/" + url;
+	}
+	
 }

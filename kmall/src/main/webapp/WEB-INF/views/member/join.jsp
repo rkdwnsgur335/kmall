@@ -24,7 +24,7 @@
  <div class="col-md-4" style="float: none; margin:0 auto;">
         <!-- Sign Up form -->
         <form id="joinForm" action="join" method="post" class="Signup mt-5">
-          <h3 style="text-align: center">회원가입</h3>
+          <p style="text-align: center" class="h1">회원가입<p>
             <hr>
  
           <div class="input-group mb-3">

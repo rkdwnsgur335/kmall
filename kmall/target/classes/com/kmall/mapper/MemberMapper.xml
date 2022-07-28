@@ -52,6 +52,30 @@
 			MEM_ID = #{mem_id}
 	
 	</update>
+	
+	<update id="modify" parameterType="com.kmall.domain.MemberVO">
+	
+		UPDATE
+			MEMBER_TBL
+		SET
+			MEM_NAME = #{mem_name},
+			
+			<if test="mem_pw != null and !mem_pw.equals('')">
+			
+			MEM_PW = #{mem_pw},
+			
+			</if>
+						
+			MEM_ZIPCODE = #{mem_zipcode},
+			MEM_ADDR = #{mem_addr},
+			MEM_ADDR_D = #{mem_addr_d},
+			MEM_PHONE = #{mem_phone},
+			MEM_ACCEPT_E = #{mem_accept_e},
+			MEM_DATE_UP = sysdate
+		WHERE
+			MEM_ID = #{mem_id}			
+	
+	</update>
 
 
 </mapper>

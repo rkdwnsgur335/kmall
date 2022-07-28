@@ -20,4 +20,6 @@ public interface MemberService {
 	
 	// 임시 비밀번호로 변경
 	void changePW(String mem_id, String mem_pw);
+	
+	void modify(MemberVO vo);
 }

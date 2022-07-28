@@ -85,7 +85,7 @@
    <link href="/resources/css/9c5ecb4.css" rel="stylesheet">
    
   </head>
-  <body>
+  <body style="padding-top: 0px;">
     
 <header>
     <%@include file="/WEB-INF/views/include/navigation.jsp" %>
