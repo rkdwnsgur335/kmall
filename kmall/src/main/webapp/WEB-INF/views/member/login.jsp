@@ -32,7 +32,7 @@
 
 <body>
     <div id="content" style="width: 350px;">
-    <img class="logo" src="images/logo.png" alt="로고이미지삽입">
+    <img class="logo" src="/resources/img/Logo.png" alt="로고이미지삽입" style="height: 80px; width: 300px;">
         <form id="loginForm" action="login" method="post">
 			<input type="text" class="form-control mb-3" id="mem_id" name="mem_id" placeholder="EmailID">
 		    <input type="password" class="form-control mb-3" id="mem_pw" name="mem_pw" placeholder="password">

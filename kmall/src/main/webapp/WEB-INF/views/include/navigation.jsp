@@ -35,34 +35,32 @@
  -->
  
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
- <a class="navbar-brand" href="/"><img src="/resources/img/Logo.png" width="200px"></a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
    </button>
-  
-  <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo01">
-    <ul class="navbar-nav">
+   
+  <a class="navbar-brand" href="/"><img src="/resources/img/Logo.png" width="200px"></a>
+
+  <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo01" >
+    <ul class="navbar-nav ">
       <c:if test="${sessionScope.loginStatus == null }">
       <!-- 로그인 이전상태 -->
       <li class="nav-item active">
-        <a class="nav-link" href="/member/login">Login<span class="sr-only">(current)</span></a>
-      <li class="nav-item active">
         <a class="nav-link" href="/member/join">Join</a>
+      <li class="nav-item active">
+        <a class="nav-link" href="/member/login">Login<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="/member/login">Modify</a>
       </li>
       </c:if>
-      
+  
        <c:if test="${sessionScope.loginStatus != null }">
     <!-- 로그인 이후상태 -->
       <li class="nav-item active">
         <a class="nav-link" href="/member/logout">Logout<span class="sr-only">(current)</span></a>
       <li class="nav-item active">
-        <a class="nav-link" href="/member/join">Join</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="/member/confrimPW">Modify</a>
+        <a class="nav-link" href="/member/confirmPW">Modify</a>
       </li>
       </c:if>
       
@@ -71,6 +69,7 @@
       </li>
     </ul>
   </div>
+
   <div>
   	<form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

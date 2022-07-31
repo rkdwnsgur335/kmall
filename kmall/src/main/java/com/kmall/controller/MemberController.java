@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailSender;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +31,7 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/member/*")
 @Log4j
 public class MemberController {
+	
 	
 	@Setter(onMethod_ = {@Autowired})
 	private MemberService memservice;
@@ -236,6 +238,38 @@ public class MemberController {
 		}
 		
 		return "redirect:/" + url;
+	}
+	
+	//회원수정(비밀번호 수정) 
+	@GetMapping("/modify")
+	public void modify(HttpSession session, Model model) {
+		
+		String mem_id = ((MemberVO) session.getAttribute("loginStatus")).getMem_id();
+		LoginDTO dto = new LoginDTO(mem_id, "");
+		
+		MemberVO vo = memservice.login_ok(dto);
+		model.addAttribute("memberVO", vo);
+		
+		
+	}
+	
+	//회원수정(비밀번호 수정) 기능
+	@PostMapping("/modify")
+	public String modify(MemberVO vo, RedirectAttributes rttr, HttpSession session ) {
+		
+		
+		if(vo.getMem_pw().equals(""));
+		
+		if(vo.getMem_pw() != null && !vo.getMem_pw().equals("")) {
+			
+			String cryptEncoderPW = vo.getMem_pw();
+			vo.setMem_pw(cryptEncoderPW);
+			rttr.addFlashAttribute("UDTPW", "UDTPW");
+		}
+		
+		memservice.modify(vo);
+		
+		return "redirect:/";
 	}
 	
 }

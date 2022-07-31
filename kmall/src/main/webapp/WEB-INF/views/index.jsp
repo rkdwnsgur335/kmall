@@ -81,8 +81,6 @@
     
     <!-- Custom styles for this template -->
    <link href="/resources/css/carousel.css" rel="stylesheet">
-   <link href="/resources/css/1381ce9.css" rel="stylesheet">
-   <link href="/resources/css/9c5ecb4.css" rel="stylesheet">
    
   </head>
   <body style="padding-top: 0px;">
