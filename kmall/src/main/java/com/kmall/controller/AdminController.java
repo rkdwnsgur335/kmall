@@ -60,7 +60,7 @@ public class AdminController {
 	@GetMapping("/adMain")
 	public String adMain() {
 		
-		return "/admin/adMain";
+		return "/admin/main";
 	}
 	
 	//로그아웃
