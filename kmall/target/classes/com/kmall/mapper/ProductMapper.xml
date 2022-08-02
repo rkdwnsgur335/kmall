@@ -5,22 +5,22 @@
 	<select id="CateBrand" resultType="com.kmall.domain.CategoryVO">
 	
 		SELECT
-			CATE_CODE, CATE_CLAS , CATE_NAME
+			CATE_CODE, CATE_CLAS, CATE_NAME
 		FROM
 			CATEGORY_TBL
-		WHER
-			CATE_CLAS='BRAND'
+		WHERE
+            CATE_CLAS = 'BRAND'
 	
 	</select>
 	
 	<select id="CateGender" resultType="com.kmall.domain.CategoryVO">
 	
 		SELECT
-			CATE_CODE, CATE_CLAS , CATE_NAME
+			CATE_CODE, CATE_CLAS, CATE_NAME
 		FROM
 			CATEGORY_TBL
-		WHER
-			CATE_CLAS='GENDER'
+		WHERE
+            CATE_CLAS = 'GENDER'
 	
 	</select>
 

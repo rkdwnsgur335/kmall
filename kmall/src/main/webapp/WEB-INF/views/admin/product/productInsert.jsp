@@ -94,7 +94,7 @@ desired effect
 					    <label for="pdt_company" class="col-sm-2 col-form-label">브랜드</label>
 						<div class="col-sm-4">
 						    <select class="form-control" name="cate_code" id="firstCategory">
-						      <c:forEach items="${cateList }" var="categoryVO">
+						      <c:forEach items="${cateList1 }" var="categoryVO">
 					    			<option value="${categoryVO.cate_code }">${categoryVO.cate_name }</option>
 					    	  </c:forEach>
 						    </select>
@@ -109,17 +109,13 @@ desired effect
 					    <label for="pdt_company" class="col-sm-2 col-form-label">성별</label>
 						<div class="col-sm-4">
 						    <select class="form-control" name="cate_code" id="SecondCategory">
-						      <c:forEach items="${cateList }" var="categoryVO">
-					    			<option value="${categoryVO.cate_code }">${categoryVO.cate_name }</option>
+						      <c:forEach items="${cateList2 }" var="categoryVO2">
+					    			<option value="${categoryVO2.cate_code }">${categoryVO2.cate_name }</option>
 					    	  </c:forEach>
 						    </select>
 						 </div>
 					  </div>
 					  <div class="form-group row">
-					    <label for="pdt_img" class="col-sm-2 col-form-label">상품이미지</label>
-					    <div class="col-sm-4"> <!-- name="pdt_img" 존재안함.  스프링에서는 Null 이 됨.-->
-					      <input type="file" class="form-control" id="uploadFile" name="uploadFile">
-					    </div>
 					    <label for="pdt_img" class="col-sm-2 col-form-label">미리보기 이미지</label>
 					    <div class="col-sm-4">
 					      <img id="change_img" style="width: 200px;height: 200px;">
@@ -271,39 +267,7 @@ desired effect
     
     console.log("버전: " + CKEDITOR.version);
 
-    //1차카테고리 선택
-    $("#firstCategory").on("change", function(){
-
-      let firstCategoryCode = $(this).val();
-
-      console.log("1차카테고리코드: " + firstCategoryCode);
-
-      let url = "/admin/product/subCategoryList/" + firstCategoryCode;
-
-      $.getJSON(url, function(subCategoryList){
-        /*
-        console.log(subCategoryList.length);
-        console.log("첫번째 데이타: " + subCategoryList[0].cate_code);
-        console.log("첫번째 데이타: " + subCategoryList[0].cate_code_prt);
-        console.log("첫번째 데이타: " + subCategoryList[0].cate_name);
-        */
-
-        //2차카테고리 태그를 참조.
-        let optionStr = "";
-        let secondCategory = $("#secondCategory");
-        
-        secondCategory.find("option").remove(); //기존 카테고리에 의하여 출력되는 요소를 제거
-        secondCategory.append("<option value=''>2차카테고리 선택</option>")
-
-        for(let i=0; i<subCategoryList.length; i++){
-          optionStr += "<option value='" + subCategoryList[i].cate_code + "'>" + subCategoryList[i].cate_name + "</option>";
-        }
-        secondCategory.append(optionStr);
-
-
-      });
-
-    });
+ 
     
   //이미지 미리보기
     $("#uploadFile").on("change", function(e){
@@ -316,10 +280,11 @@ desired effect
       }
 
       reader.readAsDataURL(file);
-
+	
+    	});
     });
+  
 
-  });
 
 </script>
 
