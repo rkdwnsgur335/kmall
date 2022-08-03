@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kmall.domain.CategoryVO;
+import com.kmall.domain.ProductVO;
 import com.kmall.service.ProductService;
+import com.kmall.util.UploadFileUtils;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -102,6 +105,20 @@ public class AdProductController {
 		
 	}
 	
+	//상품저장
+	@PostMapping("/productInsert")
+	public String productInsert(ProductVO vo, RedirectAttributes rttr) {
+		
+		//파일업로드
+		String uploadDateFolderPath = UploadFileUtils.getFolder();
+		vo.setPdt_img_folder(uploadDateFolderPath);
+		vo.setPdt_img(UploadFileUtils.uploadFile(uploadPath, uploadDateFolderPath, vo.getUploadFile()));
+		
+		//상품정보인서트
+		proservice.productInsert(vo);
+		
+		return "redirect:/admin/product/productList";
+	}
 	
 	
 	
