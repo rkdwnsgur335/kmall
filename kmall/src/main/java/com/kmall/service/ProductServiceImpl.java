@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kmall.domain.CategoryVO;
 import com.kmall.domain.ProductVO;
+import com.kmall.dto.Criteria;
 import com.kmall.mapper.ProductMapper;
 
 import lombok.Setter;
@@ -34,5 +35,32 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		promapper.productInsert(vo);
 	}
+
+	@Override
+	public List<ProductVO> getProductList(Criteria cri) {
+		// TODO Auto-generated method stub
+		return promapper.getProductList(cri);
+	}
+
+	@Override
+	public int getProductTotalCount(Criteria cri) {
+		// TODO Auto-generated method stub
+		return promapper.getProductTotalCount(cri);
+	}
+
+	@Override
+	public ProductVO getProductByNum(Integer pdt_num) {
+		// TODO Auto-generated method stub
+		return promapper.getProductByNum(pdt_num);
+	}
+
+	@Override
+	public void productModify(ProductVO vo) {
+		// TODO Auto-generated method stub
+		promapper.productModify(vo);
+		
+	}
+	
+	
 
 }

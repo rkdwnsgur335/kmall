@@ -12,16 +12,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kmall.dto.PageDTO;
 import com.kmall.domain.CategoryVO;
 import com.kmall.domain.ProductVO;
+import com.kmall.dto.Criteria;
 import com.kmall.service.ProductService;
 import com.kmall.util.UploadFileUtils;
 
@@ -120,10 +126,73 @@ public class AdProductController {
 		return "redirect:/admin/product/productList";
 	}
 	
+	//상품 리스트
+	@GetMapping("/productList")
+	public void productList(@ModelAttribute("cri") Criteria cri, Model model) {
+		
+		List<ProductVO> productList = proservice.getProductList(cri);
+		
+		for(int i=0; i<productList.size(); i++) {
+			String pdt_img_folder = productList.get(i).getPdt_img_folder().replace("\\", "/"); // File.serparator 운영체제 경로구분자
+			productList.get(i).setPdt_img_folder(pdt_img_folder);
+		}
+		
+		// 페이징쿼리에 의한 상품목록
+				model.addAttribute("productList", productList);
+				
+		// [prev] 1	 2	3	4	5  [next]
+		int totalCount = proservice.getProductTotalCount(cri);
+		model.addAttribute("pageMaker", new PageDTO(cri, totalCount));
+	}
 	
+	//상품리스트 이미지 보여주기
+	@ResponseBody
+	@GetMapping("/displayFile")
+	public ResponseEntity<byte[]> displayFile(String folderName, String fileName){
+		
+		log.info("폴더이름: " + folderName);
+		log.info("파일이름: " + fileName);
+		
+		
+		
+		//이미지를 바이트 배열로 읽어오는 작업
+		return UploadFileUtils.getFile(uploadPath, folderName + "\\" + fileName);
+	}
 	
+	//상품수정폼
+	@GetMapping("/productModify")
+	public void modify(@RequestParam("pdt_num") Integer pdt_num, @ModelAttribute("cri") Criteria cri, Model model) {
+		
+		model.addAttribute("cateList1", proservice.CateBrand());
+		model.addAttribute("cateList2", proservice.CateGender());
+		
+		//정보 가져오기
+		ProductVO vo = proservice.getProductByNum(pdt_num);
+		vo.setPdt_img_folder(vo.getPdt_img_folder().replace("\\", "/"));
+		
+		model.addAttribute("productVO", vo);
+		
+	}
 	
-	
-	
+	//상품수정하기
+	@PostMapping("/productModify")
+	public String productModify(ProductVO vo, Criteria cri, RedirectAttributes rttr) {
+		
+		if(!vo.getUploadFile().isEmpty()) {
+			
+			//1)상품 수정전 이미지 파일삭제. (날짜폴더명, 구 이미지파일명)
+			UploadFileUtils.deleteFile(uploadPath, vo.getPdt_img_folder() + "\\s_" + vo.getPdt_img());
+			
+			//상품수정이미지 파일 업로드구문.
+			String uploadDateFolderPath = UploadFileUtils.getFolder();
+			vo.setPdt_img_folder(uploadDateFolderPath); // 날짜폴더명
+			vo.setPdt_img(UploadFileUtils.uploadFile(uploadPath, uploadDateFolderPath, vo.getUploadFile()));
+		}
+		
+		proservice.productModify(vo);
+		
+		
+		return "redirect:/admin/product/productList" + cri.getListLink();
+	}
 	
 }

@@ -32,5 +32,84 @@
 			(SEQ_PRODUCT_NUM.NEXTVAL, #{cate_code}, #{pdt_name}, #{pdt_price}, #{pdt_discount}, #{pdt_detail}, #{pdt_img_folder}, #{pdt_img}, #{pdt_amount}, #{pdt_buy})
 	
 	</insert>
+	
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach collection="typeArr" item="type">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'N'.toString()">
+							PDT_NAME like '%' || #{keyword} || '%'
+						</when>
+						<when test="type == 'C'.toString()">
+							PDT_COMPANY like '%' || #{keyword} || '%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	
+	<!-- 1)데이타(목록) : 페이징쿼리(인덱스힌트 구문) -->
+	<select id="getProductList" parameterType="com.kmall.dto.Criteria" resultType="com.kmall.domain.ProductVO">
+		<![CDATA[
+		SELECT RN, PDT_NUM, CATE_CODE, PDT_NAME, PDT_PRICE, PDT_DISCOUNT, PDT_DETAIL, PDT_IMG_FOLDER, PDT_IMG, PDT_AMOUNT, PDT_BUY, PDT_DATE_SUB, PDT_DATE_UP
+		FROM (
+		    SELECT  /*+ INDEX_DESC(PRODUCT_TBL PK_PRODUCT_NUM)*/ ROWNUM RN, PDT_NUM, CATE_CODE, PDT_NAME, PDT_PRICE, PDT_DISCOUNT, PDT_DETAIL, PDT_IMG_FOLDER, PDT_IMG, PDT_AMOUNT, PDT_BUY, PDT_DATE_SUB, PDT_DATE_UP
+		FROM PRODUCT_TBL
+		    WHERE  
+		]]>    
+		 <include refid="criteria"></include> 
+		 
+		<![CDATA[ 
+		   
+		         ROWNUM <= #{pageNum} * #{amount}
+		)
+		WHERE RN > (#{pageNum}-1) * #{amount}
+		]]>
+	</select>
+	
+	<!-- 2)테이블 데이타개수 : 페이징구현사용 -->
+	<select id="getProductTotalCount" parameterType="com.kmall.dto.Criteria" resultType="int">
+		SELECT count(*) FROM PRODUCT_TBL WHERE
+		
+		<include refid="criteria"></include> 
+		
+		PDT_NUM > 0
+		
+	</select>
+	
+	<select id="getProductByNum" parameterType="int" resultType="com.kmall.domain.ProductVO">
+	
+		SELECT 
+			PDT_NUM, CATE_CODE, PDT_NAME, PDT_PRICE, PDT_DISCOUNT, PDT_DETAIL, PDT_IMG_FOLDER, PDT_IMG, PDT_AMOUNT, PDT_BUY, PDT_DATE_SUB, PDT_DATE_UP
+		FROM
+			PRODUCT_TBL
+		WHERE
+			PDT_NUM = #{pdt_num}
+	
+	</select>
+	
+	<update id="productModify" parameterType="com.kmall.domain.ProductVO">
+	
+		UPDATE
+			PRODUCT_TBL
+		SET
+			CATE_CODE = #{cate_code}, 
+			PDT_NAME = #{pdt_name}, 
+			PDT_PRICE = #{pdt_price}, 
+			PDT_DISCOUNT = #{pdt_discount}, 
+			PDT_DETAIL = #{pdt_detail}, 
+			PDT_IMG_FOLDER = #{pdt_img_folder}, 
+			PDT_IMG = #{pdt_img}, 
+			PDT_AMOUNT = #{pdt_amount}, 
+			PDT_BUY = #{pdt_buy}, 
+			PDT_DATE_UP = SYSDATE
+		WHERE
+			PDT_NUM = #{pdt_num}
+	
+	</update>
+	
+	
 
 </mapper>
