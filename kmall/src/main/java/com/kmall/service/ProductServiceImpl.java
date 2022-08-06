@@ -60,6 +60,12 @@ public class ProductServiceImpl implements ProductService {
 		promapper.productModify(vo);
 		
 	}
+
+	@Override
+	public void productDelete(Integer ptd_num) {
+		// TODO Auto-generated method stub
+		promapper.productDelete(ptd_num);
+	}
 	
 	
 

@@ -21,4 +21,6 @@ public interface ProductMapper {
 	ProductVO getProductByNum(Integer pdt_num); // 상품번호로 상품정보 가져오기
 	
 	void productModify(ProductVO vo); // 상품수정
+	
+	void productDelete(Integer ptd_num); // 상품삭제
 }

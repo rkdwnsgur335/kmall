@@ -195,4 +195,16 @@ public class AdProductController {
 		return "redirect:/admin/product/productList" + cri.getListLink();
 	}
 	
+	//상품삭제하기
+	@GetMapping("/productDelete")
+	public String delete(@RequestParam("pdt_num") Integer pdt_num, @ModelAttribute("cri") Criteria cri, String pdt_img_folder, String pdt_img) {
+		
+		//이미지 삭제
+		UploadFileUtils.deleteFile(uploadPath, pdt_img_folder + "\\s_" + pdt_img);
+		
+		proservice.productDelete(pdt_num);
+		
+		return "redirect:/admin/product/productList" + cri.getListLink();
+	}
+	
 }

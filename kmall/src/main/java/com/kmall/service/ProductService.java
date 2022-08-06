@@ -22,4 +22,6 @@ public interface ProductService {
 	
 	void productModify(ProductVO vo); // 상품수정
 	
+	void productDelete(Integer ptd_num); // 상품삭제
+	
 }

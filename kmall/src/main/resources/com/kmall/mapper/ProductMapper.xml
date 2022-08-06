@@ -110,6 +110,15 @@
 	
 	</update>
 	
+	<delete id="productDelete" parameterType="int">
+	
+		DELETE FROM
+			PRODUCT_TBL
+		WHERE
+			PDT_NUM = #{pdt_num}
+	
+	</delete>
+	
 	
 
 </mapper>
