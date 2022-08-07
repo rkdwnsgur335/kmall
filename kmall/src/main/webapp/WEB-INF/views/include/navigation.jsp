@@ -50,9 +50,6 @@
       <li class="nav-item active">
         <a class="nav-link" href="/member/login">Login<span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="/member/login">Modify</a>
-      </li>
       </c:if>
   
        <c:if test="${sessionScope.loginStatus != null }">
@@ -65,7 +62,7 @@
       </c:if>
       
       <li class="nav-item active">
-        <a class="nav-link" href="#">Shop</a>
+        <a class="nav-link" href="/user/product/productList">Shop</a>
       </li>
     </ul>
   </div>

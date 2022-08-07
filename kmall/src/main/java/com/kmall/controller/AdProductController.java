@@ -138,7 +138,7 @@ public class AdProductController {
 		}
 		
 		// 페이징쿼리에 의한 상품목록
-				model.addAttribute("productList", productList);
+		model.addAttribute("productList", productList);
 				
 		// [prev] 1	 2	3	4	5  [next]
 		int totalCount = proservice.getProductTotalCount(cri);
