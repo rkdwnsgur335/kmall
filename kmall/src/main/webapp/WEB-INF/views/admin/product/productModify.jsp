@@ -112,10 +112,9 @@ desired effect
 					    </div>
 					    <label for="pdt_company" class="col-sm-2 col-form-label">성별</label>
 						<div class="col-sm-4">
-						    <select class="form-control" name="cate_code" id="SecondCategory">
-						      <c:forEach items="${cateList2 }" var="categoryVO2">
-					    			<option value="${categoryVO2.cate_code }" ${categoryVO2.cate_code != productVO.cate_code ? 'selected':'' }>${categoryVO2.cate_name }</option>
-					    	  </c:forEach>
+						    <select class="form-control" name="pdt_gender" id="SecondCategory">
+					    			<option value="남성"  ${ productVO.pdt_gender == '남성' ? 'selected':''}>남성</option>
+					    			<option value="여성"  ${ productVO.pdt_gender == '여성' ? 'selected':''}>여성</option>
 						    </select>
 						 </div>
 					  </div>

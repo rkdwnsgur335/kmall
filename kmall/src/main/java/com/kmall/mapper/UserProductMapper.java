@@ -7,6 +7,8 @@ import com.kmall.domain.ProductVO;
 import com.kmall.dto.Criteria;
 
 public interface UserProductMapper {
+	
+	List<CategoryVO> CateBrand(); // 브랜드 카테고리
 
 	List<ProductVO> getProductPage(Criteria cri); // 카테고리로 상품정보 받아오기
 	

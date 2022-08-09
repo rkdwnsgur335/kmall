@@ -51,7 +51,6 @@ public class AdProductController {
 		
 		
 		model.addAttribute("cateList1", proservice.CateBrand());
-		model.addAttribute("cateList2", proservice.CateGender());
 		
 	}
 	

@@ -13,17 +13,6 @@
 	
 	</select>
 	
-	<select id="CateGender" resultType="com.kmall.domain.CategoryVO">
-	
-		SELECT
-			CATE_CODE, CATE_CLAS, CATE_NAME
-		FROM
-			CATEGORY_TBL
-		WHERE
-            CATE_CLAS = 'GENDER'
-	
-	</select>
-	
 	<insert id="productInsert" parameterType="com.kmall.domain.ProductVO">
 	
 			INSERT INTO PRODUCT_TBL
@@ -53,9 +42,9 @@
 	<!-- 1)데이타(목록) : 페이징쿼리(인덱스힌트 구문) -->
 	<select id="getProductList" parameterType="com.kmall.dto.Criteria" resultType="com.kmall.domain.ProductVO">
 		<![CDATA[
-		SELECT RN, PDT_NUM, CATE_CODE, PDT_NAME, PDT_PRICE, PDT_DISCOUNT, PDT_DETAIL, PDT_IMG_FOLDER, PDT_IMG, PDT_AMOUNT, PDT_BUY, PDT_DATE_SUB, PDT_DATE_UP
+		SELECT RN, PDT_NUM, CATE_CODE, PDT_NAME, PDT_PRICE, PDT_DISCOUNT, PDT_DETAIL, PDT_IMG_FOLDER, PDT_IMG, PDT_AMOUNT, PDT_BUY, PDT_DATE_SUB, PDT_DATE_UP, PDT_GENDER
 		FROM (
-		    SELECT  /*+ INDEX_DESC(PRODUCT_TBL PK_PRODUCT_NUM)*/ ROWNUM RN, PDT_NUM, CATE_CODE, PDT_NAME, PDT_PRICE, PDT_DISCOUNT, PDT_DETAIL, PDT_IMG_FOLDER, PDT_IMG, PDT_AMOUNT, PDT_BUY, PDT_DATE_SUB, PDT_DATE_UP
+		    SELECT  /*+ INDEX_DESC(PRODUCT_TBL PK_PRODUCT_NUM)*/ ROWNUM RN, PDT_NUM, CATE_CODE, PDT_NAME, PDT_PRICE, PDT_DISCOUNT, PDT_DETAIL, PDT_IMG_FOLDER, PDT_IMG, PDT_AMOUNT, PDT_BUY, PDT_DATE_SUB, PDT_DATE_UP, PDT_GENDER
 		FROM PRODUCT_TBL
 		    WHERE  
 		]]>    
@@ -82,7 +71,7 @@
 	<select id="getProductByNum" parameterType="int" resultType="com.kmall.domain.ProductVO">
 	
 		SELECT 
-			PDT_NUM, CATE_CODE, PDT_NAME, PDT_PRICE, PDT_DISCOUNT, PDT_DETAIL, PDT_IMG_FOLDER, PDT_IMG, PDT_AMOUNT, PDT_BUY, PDT_DATE_SUB, PDT_DATE_UP
+			PDT_NUM, CATE_CODE, PDT_NAME, PDT_PRICE, PDT_DISCOUNT, PDT_DETAIL, PDT_IMG_FOLDER, PDT_IMG, PDT_AMOUNT, PDT_BUY, PDT_DATE_SUB, PDT_DATE_UP, PDT_GENDER
 		FROM
 			PRODUCT_TBL
 		WHERE
@@ -104,7 +93,8 @@
 			PDT_IMG = #{pdt_img}, 
 			PDT_AMOUNT = #{pdt_amount}, 
 			PDT_BUY = #{pdt_buy}, 
-			PDT_DATE_UP = SYSDATE
+			PDT_DATE_UP = SYSDATE,
+			PDT_GENDER = #{pdt_gender}
 		WHERE
 			PDT_NUM = #{pdt_num}
 	

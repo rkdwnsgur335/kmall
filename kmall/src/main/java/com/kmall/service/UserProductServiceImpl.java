@@ -19,6 +19,12 @@ public class UserProductServiceImpl implements UserProductService {
 	private UserProductMapper userpromapper;
 	
 	@Override
+	public List<CategoryVO> CateBrand() {
+		// TODO Auto-generated method stub
+		return userpromapper.CateBrand();
+	}
+	
+	@Override
 	public ProductVO getProductByNum(Integer pdt_num) {
 		// TODO Auto-generated method stub
 		return userpromapper.getProductByNum(pdt_num);
@@ -29,6 +35,8 @@ public class UserProductServiceImpl implements UserProductService {
 		// TODO Auto-generated method stub
 		return userpromapper.getProductPage(cri);
 	}
+
+	
 
 	
 

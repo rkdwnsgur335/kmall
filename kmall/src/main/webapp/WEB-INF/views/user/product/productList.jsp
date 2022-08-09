@@ -28,9 +28,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 	<body>
 	<div class="row">
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" style="margin-top: 5%; background-color: white;">
-      <div class="sidebar-sticky pt-3">
-		<div class="card">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" >
+		<div class="card" style="margin-top: 5%; ">
 			<article class="card-group-item">
 				<header class="card-header">
 					<h6 class="title">브랜드 </h6>
@@ -94,18 +93,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				<div class="row">
 			
 				
-		        <c:forEach items="${productList }" var="productVO">
+		        <c:forEach items="${productList }" var="productVO" varStatus="status">
 		        <div class="col-md-4">
-		          <div class="card mb-4 shadow-sm">
+		          <div class="card mb-4 border-0">
 		            <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
 		            <!-- 상품이미지 -->
 		            <a class="move" href="${productVO.pdt_num }">
-		            	<img src="/user/product/displayFile?folderName=${productVO.pdt_img_folder }&fileName=s_${productVO.pdt_img }" 
-			      			alt="" class="bd-placeholder-img card-img-top" width="100%" height="225" onerror="this.onerror=null; this.src='/image/no_images.png'">
+		            	<img src="/user/product/displayFile?folderName=${productVO.pdt_img_folder }&fileName=${productVO.pdt_img }" 
+			      			alt="" class="bd-placeholder-img card-img-top" width="100%" style="background-color: rgb(245, 245, 245);">
 			      	</a>
 		
 		            <div class="card-body">
 		              <p class="card-text">
+		              	  ${cateList[status.index].cate_name}<br>
 			              ${productVO.pdt_name }<br>
 			              <fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${productVO.pdt_price }" currencySymbol="\\"></fmt:formatNumber>
 			              <br>

@@ -24,7 +24,7 @@ public class ProductVO {
 	private String 	pdt_buy;
 	private Date 	pdt_date_sub;
 	private Date 	pdt_date_up;
-	
+	private String 	pdt_gender;
 	
 	private MultipartFile uploadFile;
 }

@@ -22,26 +22,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
  
   
 </head>
-<!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the
-desired effect
-|---------------------------------------------------------|
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
-|               | layout-boxed                            |
-|               | layout-top-nav                          |
-|               | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
--->
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
@@ -105,7 +85,7 @@ desired effect
 	    <tr>
 	      <td scope="row"><c:out value="${productVO.pdt_num }" /></td>
 	      <td>
-	      	<img src="/admin/product/displayFile?folderName=${productVO.pdt_img_folder }&fileName=s_${productVO.pdt_img }" 
+	      	<img src="/admin/product/displayFile?folderName=${productVO.pdt_img_folder }&fileName=${productVO.pdt_img }" 
 	      		alt="" style="width: 80px;height: 80px;">
 	      	<a class="move" href="${productVO.pdt_num }"><c:out value="${productVO.pdt_name }" escapeXml="true" /></a>
 	      </td>

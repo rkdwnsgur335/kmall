@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kmall.mapper.UserProductMapper">
-
+	
+	<select id="CateBrand" resultType="com.kmall.domain.CategoryVO">
+	
+		SELECT
+			CATE_CODE, CATE_CLAS, CATE_NAME
+		FROM
+			CATEGORY_TBL
+		WHERE
+            CATE_CLAS = 'BRAND'
+	
+	</select>
+	
+	
 
 	<sql id="criteria">
 		<trim prefix="(" suffix=") AND " prefixOverrides="OR">

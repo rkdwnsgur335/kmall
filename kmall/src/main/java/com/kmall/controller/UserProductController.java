@@ -41,6 +41,7 @@ public class UserProductController {
 		
 		List<ProductVO> productList = proservice.getProductPage(cri);
 		
+		
 		cri.setAmount(9);
 		
 		for(int i=0; i<productList.size(); i++) {
@@ -48,9 +49,13 @@ public class UserProductController {
 			productList.get(i).setPdt_img_folder(pdt_img_folder);
 		}
 		
+	
+		
+		
 		// 페이징쿼리에 의한 상품목록
-		model.addAttribute("productList", productList);
-			
+		model.addAttribute("productList", productList); // 상품정보
+		model.addAttribute("cateList", proservice.CateBrand()); // 브랜드 이름
+
 		/*
 		// [prev] 1	 2	3	4	5  [next]
 		int totalCount = proservice.getProductTotalCount(cri);

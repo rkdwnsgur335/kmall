@@ -21,26 +21,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
  
   
 </head>
-<!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the
-desired effect
-|---------------------------------------------------------|
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
-|               | layout-boxed                            |
-|               | layout-top-nav                          |
-|               | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
--->
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
@@ -108,10 +88,9 @@ desired effect
 					    </div>
 					    <label for="pdt_company" class="col-sm-2 col-form-label">성별</label>
 						<div class="col-sm-4">
-						    <select class="form-control" name="cate_code" id="SecondCategory">
-						      <c:forEach items="${cateList2 }" var="categoryVO2">
-					    			<option value="${categoryVO2.cate_code }">${categoryVO2.cate_name }</option>
-					    	  </c:forEach>
+						    <select class="form-control" name="pdt_gender" id="SecondCategory">
+					    			<option value="남성">남성</option>
+					    			<option value="여성">여성</option>
 						    </select>
 						 </div>
 					  </div>
