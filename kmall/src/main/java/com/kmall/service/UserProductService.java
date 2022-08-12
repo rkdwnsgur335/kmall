@@ -13,4 +13,6 @@ public interface UserProductService {
 	List<ProductVO> getProductPage(Criteria cri); // 카테고리로 상품정보 받아오기
 
 	ProductVO getProductByNum(Integer pdt_num); // 상품 상세정보
+	
+	int getProductPageall(Criteria cri); // 상품목록 전부 불러오기
 }

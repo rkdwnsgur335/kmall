@@ -91,8 +91,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <table class="table table-striped table-sm">
 		      <div class="container">
 				<div class="row">
-			
-				
 		        <c:forEach items="${productList }" var="productVO" varStatus="status">
 		        <div class="col-md-4">
 		          <div class="card mb-4 border-0">
@@ -112,9 +110,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		              </p>
 		              <div class="d-flex justify-content-between align-items-center">
 		                <div class="btn-group">
-		                  <button type="button" name="btnBuyCart" data-pdt_num="${productVO.pdt_num }" class="btn btn-sm btn-outline-secondary">Buy & Cart</button>                  
+		                  <button type="button" name="btnBuy" data-pdt_num="${productVO.pdt_num }" class="btn btn-sm btn-outline-secondary">Buy</button>                  
 		                </div>
-		                <small class="text-muted">9 mins</small>
 		              </div>
 		            </div>
 		          </div>
@@ -126,6 +123,154 @@ scratch. This page gets rid of all links and provides the needed markup only.
       </div>
     </main>
   </div>
+  
+  <div class="row">
+      	<div class="col-12">
+      		<nav aria-label="...">
+			  <ul class="pagination">
+			    <!-- 이전표시 -->
+			    <c:if test="${pageMaker.prev }">
+				    <li class="page-item">
+				      <a class="page-link" href="${pageMaker.startPage - 1 }">Previous</a>
+				    </li>
+			    </c:if>
+			    
+			    <!-- 페이지번호 표시.  1  2  3  4  5 -->
+			    
+			    <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="num" >
+			    	<li class='page-item ${pageMaker.cri.pageNum == num ? "active": "" }'><a class="page-link" href="${num}">${num}</a></li>
+			    </c:forEach>
+			    <!-- 
+			    <li class="page-item active" aria-current="page">
+			      <span class="page-link">2</span>
+			    </li>
+			    <li class="page-item"><a class="page-link" href="#">3</a></li>
+			     -->
+			    <!-- 다음표시 -->
+			    <c:if test="${pageMaker.next }">
+				    <li class="page-item">
+				      <a class="page-link" href="${pageMaker.endPage + 1 }">Next</a>
+				    </li>
+			    </c:if>
+				
+			  </ul>
+			  <!--1)페이지 번호 클릭시 2)상품수정버튼 클릭시 3)상품삭제버튼 클릭시-->
+				<form id="actionForm" action="productDetail" method="get">
+					<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+					<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+					<input type="hidden" name="type" value="${pageMaker.cri.type}">
+					<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+				</form>
+			</nav>
+      	</div>
+      </div>
+     
+     
+ <script>
+
+    $(function(){
+
+      $("button[name='btnBuyCart']").on("click", function(){
+
+        $("#modal_productDetail").modal('show');
+
+        let url = "/user/product/productDetail/" + $(this).data("pdt_num");
+        
+        $.getJSON(url, function(result) {
+
+          //모달 대화상자에서 상품상세정보 표시
+          //console.log("상품상세정보" + result.pdt_num);
+			
+          //상품코드
+          $("div#modal_productDetail input#pdt_num").val(result.pdt_num);
+          //상품이름
+          $("div#modal_productDetail input#pdt_name").val(result.pdt_name);
+          //판매가격
+          $("div#modal_productDetail input#pdt_price").val(result.pdt_price);
+          //제조사
+          $("div#modal_productDetail input#pdt_company").val(result.pdt_company);
+          //상품이미지
+          // /user/product/displayFile?folderName=${productVO.pdt_img_folder }&fileName=s_${productVO.pdt_img }
+          let url = "/user/product/displayFile?folderName=" + result.pdt_img_folder + "&" + "fileName=" + result.pdt_img;
+          
+          //console.log("이미지파일경로: " + url);
+          $("div#modal_productDetail img#modal_detail_image").attr("src", url);
+          
+
+        });
+
+      });
+
+      //장바구니 담기
+      $("button[name='btnModalCart']").on("click", function(){
+
+        $.ajax({
+          url : '/user/cart/cart_add',
+          data: { pdt_num : $("div#modal_productDetail input#pdt_num").val(), cart_amount : $("div#modal_productDetail input#pdt_amount").val()},
+          dataType: 'text',
+          success: function(result) {
+            if(result == "success") {
+              alert("장바구니에 추가되었습니다.");
+              if(confirm("장바구니로 이동하시겠습니까?")) {
+                location.href = "/user/cart/cart_list";
+              }
+
+            }
+          }
+        });
+      });
+
+      
+      //actionForm 참조 : 1)페이지번호 클릭 2)검색버튼 클릭
+      let actionForm = $("#actionForm");
+      
+    //3)페이지번호 클릭
+      $("ul.pagination li a.page-link").on("click", function(e){
+
+        e.preventDefault(); // <a>태그의 링크기능 무력화
+
+        let pageNum = $(this).attr("href");
+
+        actionForm.find("input[name='pageNum']").val(pageNum);
+
+        //pageNum 필드는 actionForm에 수동으로 작업되어 있어, 추가하는 것이 아니라, 참조하여 값을 변경한다.
+        
+        let url = "/user/product/productList/${cate_code}/" + encodeURIComponent("${cate_name}");
+
+        actionForm.attr("method", "get");
+        actionForm.attr("action", url);
+        actionForm.submit();
+
+       
+      });
+
+      
+      let searchForm = $("#searchForm");
+      //검색버튼 클릭시 pageNum 초기화
+      $("#btnSearch").on("click", function(){
+
+        searchForm.find("input[name='pageNum']").val(1);
+        searchForm.submit();
+      });
+
+      //상품이미지, 상품제목 클릭
+      $("div.container a.move").on("click", function(e){
+        e.preventDefault();
+
+        let pdt_num = $(this).attr("href");
+		let cate_code = $(this).attr("href");
+
+        actionForm.attr("method", "get");
+        actionForm.attr("action", "/user/product/productDetail");
+
+        actionForm.append("<input type='hidden' name='pdt_num' value='" + pdt_num + "'>");
+        actionForm.submit();
+
+      });
+      
+    });  //jquery ready이벤트 끝
+
+  </script>
      
     </body>
 </html>

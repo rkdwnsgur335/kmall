@@ -10,7 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kmall.service.UserProductService;
@@ -56,11 +58,11 @@ public class UserProductController {
 		model.addAttribute("productList", productList); // 상품정보
 		model.addAttribute("cateList", proservice.CateBrand()); // 브랜드 이름
 
-		/*
+		
 		// [prev] 1	 2	3	4	5  [next]
-		int totalCount = proservice.getProductTotalCount(cri);
+		int totalCount = proservice.getProductPageall(cri);
 		model.addAttribute("pageMaker", new PageDTO(cri, totalCount));
-		*/
+		
 	}
 	
 	
@@ -76,6 +78,18 @@ public class UserProductController {
 		
 		//이미지를 바이트 배열로 읽어오는 작업
 		return UploadFileUtils.getFile(uploadPath, folderName + "\\" + fileName);
+	}
+	
+	//상품상세.
+	@GetMapping("/productDetail")
+	public String productDetail(@RequestParam("pdt_num") Integer pdt_num, @ModelAttribute("cri") Criteria cri, Model model) {
+		
+		ProductVO vo = proservice.getProductByNum(pdt_num);
+		vo.setPdt_img_folder(vo.getPdt_img_folder().replace("\\", "/"));
+		
+		model.addAttribute("productVO", vo);
+		
+		return "/user/product/productDetail";
 	}
 	
 }

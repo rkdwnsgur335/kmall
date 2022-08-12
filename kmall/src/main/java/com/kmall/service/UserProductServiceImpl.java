@@ -36,6 +36,12 @@ public class UserProductServiceImpl implements UserProductService {
 		return userpromapper.getProductPage(cri);
 	}
 
+	@Override
+	public int getProductPageall(Criteria cri) {
+		// TODO Auto-generated method stub
+		return userpromapper.getProductPageall(cri);
+	}
+
 	
 
 	

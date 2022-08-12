@@ -59,6 +59,9 @@
       <li class="nav-item active">
         <a class="nav-link" href="/member/confirmPW">Modify</a>
       </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/user/cart/cart_list">Cart</a>
+      </li>
       </c:if>
       
       <li class="nav-item active">

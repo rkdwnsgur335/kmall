@@ -49,6 +49,12 @@
 		WHERE RN > (#{pageNum}-1) * #{amount}
 		]]>
 	</select>
+	
+	<select id="getProductPageall" parameterType="com.kmall.dto.Criteria" resultType="int">
+	SELECT count(*) FROM PRODUCT_TBL
+	</select>
+	
+	
 
 	<select id="getProductByNum" parameterType="int" resultType="com.kmall.domain.ProductVO">
 		SELECT 
