@@ -36,5 +36,18 @@ public class CartServiceImpl implements CartService {
 		cartmapper.cart_amount_update(cart_code, cart_amount);
 	}
 
+	@Override
+	public void cart_delete(Long cart_code) {
+		// TODO Auto-generated method stub
+		cartmapper.cart_delete(cart_code);
+	}
+
+	@Override
+	public void deleteselect(CartVO vo) {
+		// TODO Auto-generated method stub
+		cartmapper.deleteselect(vo);
+		
+	}
+
 	
 }

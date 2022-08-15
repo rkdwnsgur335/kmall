@@ -108,11 +108,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			              <fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${productVO.pdt_price }" currencySymbol="\\"></fmt:formatNumber>
 			              <br>
 		              </p>
-		              <div class="d-flex justify-content-between align-items-center">
-		                <div class="btn-group">
-		                  <button type="button" name="btnBuy" data-pdt_num="${productVO.pdt_num }" class="btn btn-sm btn-outline-secondary">Buy</button>                  
-		                </div>
-		              </div>
 		            </div>
 		          </div>
 		        </div>

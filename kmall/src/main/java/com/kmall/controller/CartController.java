@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -78,5 +79,40 @@ public class CartController {
 		
 		return "redirect:/user/cart/cart_list";
 	}
+	
+	//장바구니 상품 삭제(개별)
+	@GetMapping("/cart_delete")
+	public String cart_delete(@RequestParam("cart_code") Long cart_code) {
+		
+		cartservice.cart_delete(cart_code);
+		
+		return "redirect:/user/cart/cart_list";
+	}
+	
+	//장바구니 상품 삭제(선택)
+	@ResponseBody
+	@PostMapping("/deleteselect")
+	public int deleteselect(@RequestParam("chbox[]") List<String> checkArr,CartVO vo, HttpSession session ) {
+	
+		String mem_id = ((MemberVO) session.getAttribute("loginStatus")).getMem_id();
+		vo.setMem_id(mem_id);
+		
+		int result = 0;
+		int cart_code = 0;
+		
+		if(mem_id != null) {
+			vo.setMem_id(mem_id);
+			
+			for(String i : checkArr) {
+				cart_code = Integer.parseInt(i);
+				vo.setCart_code((long) cart_code);
+				cartservice.deleteselect(vo);
+			}
+			result = 1;
+		}
+		
+		return result;
+	}
+	
 	
 }

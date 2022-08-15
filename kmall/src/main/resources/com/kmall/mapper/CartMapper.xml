@@ -44,5 +44,22 @@
 		
 	
 	</update>
+	
+	<delete id="cart_delete" parameterType="long">
+	
+		DELETE FROM
+			CART_TBL
+		WHERE
+			CART_CODE = #{cart_code}
+	
+	</delete>
+	
+	<delete id="deleteselect" parameterType="com.kmall.domain.CartVO">
+	 	 
+	 	 DELETE CART_TBL
+	 	 
+	     WHERE CART_CODE = #{cart_code}
+
+	</delete>
 
 </mapper>

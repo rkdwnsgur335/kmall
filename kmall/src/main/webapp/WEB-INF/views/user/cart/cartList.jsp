@@ -30,6 +30,10 @@
           font-size: 3.5rem;
         }
       }
+      
+      button {
+      border: 1px;
+      }
     </style>
 	
      <!-- Bootstrap core CSS -->
@@ -39,7 +43,7 @@
 	<!-- bundle -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
 <script type="text/javascript" src="/resources/js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" src="/resources/js/jquery.slim.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   
   <%@include file="/WEB-INF/views/include/navigation.jsp" %>  
 
@@ -62,12 +66,13 @@
 				  <table class="table table-hover" id="cartlistresult">
 					  <thead>
 					    <tr>
+					    	<th scope="col"><input type="checkbox" class="allcheck" id="allcheck"></th>
 						    <th scope="col">이미지</th>
-						    <th scope="col">상품정보</th>
+						    <th scope="col" style="padding-right:50px;">상품정보</th>
 						    <th scope="col">판매가</th>
 						    <th scope="col">수량</th>
 						    <th scope="col">배송구분</th>
-						    <th scope="col">삭제</th>
+						    <th scope="col">지우기</th>
 						</tr>
 					  </thead>
 					  <tbody>
@@ -80,7 +85,11 @@
 					    
 					     
 					    <tr>
-						    <td class="thumb gClearLine">
+					    	<td>
+					    		<input type="checkbox" class="chbox" id="chbox" data-cart_code="${cartVO.cart_code }">
+					    	</td>
+					    
+						    <td>
 						    <a class="move" href="${productVO.pdt_num }">
 									<img src="/user/product/displayFile?folderName=${cartVO.pdt_img_folder }&fileName=${cartVO.pdt_img }" 
 									alt="" style="width: 80px;height: 80px;" onerror="this.onerror=null; this.src='/image/no_images.png'">
@@ -98,14 +107,14 @@
 						    <td>
 						        <span class="">
 						            <span class="ec-base-qty"><input name="cart_amount"  size="2" value='<c:out value="${cartVO.cart_amount }" />' type="text"></span>
-						            <button type="button" name="btnCartAmountChange2" data-cart_code="${cartVO.cart_code }" class="btn btn-link">수량변경</button>
+						            <button type="button" name="btnCartAmountChange2" data-cart_code="${cartVO.cart_code }">변경</button>
 						        </span>
 						    </td>
 						    <td>
 						        <div class="txtInfo">기본배송<br></div>
 						    </td>
-						    <td rowspan="1" class="">
-						        <p class="displaynone">삭제<span class="displaynone"><br></span><br></p>
+						    <td rowspan="1">
+						        <button class="" name="btnCartDelete" data-cart_code="${cartVO.cart_code }">삭제</button>
 						    </td>
 						</tr>
 					    			
@@ -117,10 +126,10 @@
 					  <tfoot>
 					  	<tr> <!--  empty 데이타가 존재하지않으면 true, 존재하면 false -->
 					  		<c:if test="${!empty cartList }">
-					  		<td colspan="6" style="text-align: right">총 구매금액: <span id="cartTotalPrice"><fmt:formatNumber type="number" maxFractionDigits="3" value="${sum }" ></fmt:formatNumber></span></td>
+					  		<td colspan="7" style="text-align: right"><h4>Total: <span id="cartTotalPrice"><fmt:formatNumber type="number" maxFractionDigits="3" value="${sum }" ></fmt:formatNumber>￦</span></h4></td>
 					  		</c:if>
 					  		<c:if test="${empty cartList }">
-					  		<td colspan="6" style="text-align: center">장바구니에 담긴 상품이 없습니다.</td>
+					  		<td colspan="7" style="text-align: center">장바구니에 담긴 상품이 없습니다.</td>
 					  		</c:if>
 					  	</tr>
 					  	
@@ -129,9 +138,9 @@
 	
      			</div>
      			<div class="box-footer text-center">
-     				<button type="button" id="btnEmpty" class="btn btn-primary">장바구니 비우기</button>
-     				<button type="button" class="btn btn-primary">계속 쇼핑하기</button>
-     				<button type="button" id="btnOrder" class="btn btn-primary">주문하기</button>
+     				<button type="button" id="btnEmpty" class="btn btn-dark">장바구니 비우기</button>
+     				<button type="button" id="deleteselect" class="btn btn-dark">삭제하기</button>
+     				<button type="button" id="btnOrder" class="btn btn-dark">주문하기</button>
      			</div>
      		</div>
      	</div>
@@ -144,7 +153,54 @@
 	
 
   <script>
+  	
+  	//체크박스 클릭시 전부 체크
+  	$("#allcheck").click(function(){
+		
+  		let chk = $("#allcheck").prop("checked");
+  		
+  		if(chk){
+  			$("#chbox").prop("checked", true);
+  		}else {
+  			$("#chbox").prop("checked", false);
+  		}
+  		
+	});
+	
+  	//전부클릭 체크박스 선택 후 개별 체크박스 클릭시 체크해제
+	$("#chbox").click(function(){
+		
+		$("#allcheck").prop("checked", false);
+	});
+  	
+  	//선택삭제
+  	$("#deleteselect").click(function(){
+		let confirmDel = confirm("선택된 상품들을 삭제하시겠습니까?");
 
+		if(confirmDel) {
+			let checkArr = new Array();
+			
+			$("input[class='chbox']:checked").each(function(){
+				checkArr.push($(this).attr("data-cart_code"));
+			});
+
+			$.ajax({
+				url : "/user/cart/deleteselect",
+				type : "post",
+				data : {chbox : checkArr },
+				success : function(){
+					alert("삭제가 완료되었습니다.");
+
+					location.href = "/user/cart/cart_list";
+				}
+			});
+		}
+
+	});
+	
+	
+	
+	
     $(function(){
 
       //수량변경(Ajax) 버튼클릭 - 장바구니코드, 변경수량
