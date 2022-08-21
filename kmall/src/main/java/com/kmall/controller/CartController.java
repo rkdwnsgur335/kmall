@@ -92,12 +92,11 @@ public class CartController {
 	//장바구니 상품 삭제(선택)
 	@ResponseBody
 	@PostMapping("/deleteselect")
-	public int deleteselect(@RequestParam("chbox[]") List<String> checkArr,CartVO vo, HttpSession session ) {
+	public void deleteselect(@RequestParam("chbox[]") List<String> checkArr,CartVO vo, HttpSession session ) {
 	
 		String mem_id = ((MemberVO) session.getAttribute("loginStatus")).getMem_id();
 		vo.setMem_id(mem_id);
 		
-		int result = 0;
 		int cart_code = 0;
 		
 		if(mem_id != null) {
@@ -108,10 +107,8 @@ public class CartController {
 				vo.setCart_code((long) cart_code);
 				cartservice.deleteselect(vo);
 			}
-			result = 1;
 		}
 		
-		return result;
 	}
 	
 	
