@@ -20,4 +20,7 @@ public interface ReviewMapper {
 	
 	//후기 수정
 	void modify(ReviewVO vo);
+	
+	//후기 삭제
+	void delete(Integer rv_num);
 }

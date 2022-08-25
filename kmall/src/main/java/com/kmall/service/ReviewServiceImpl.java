@@ -43,6 +43,12 @@ public class ReviewServiceImpl implements ReviewService{
 		reviewmapper.modify(vo);
 	}
 
+	@Override
+	public void delete(Integer rv_num) {
+		// TODO Auto-generated method stub
+		reviewmapper.delete(rv_num);
+	}
+
 
 
 }

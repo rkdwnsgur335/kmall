@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kmall.mapper.OrderList">
+	
+	<select id="cartOrderList" parameterType="string" resultType="com.kmall.domain.CartOrderInfo">
+
+	SELECT 
+		C.PDT_NUM, C.MEM_ID, C.CART_AMOUNT, P.PDT_NAME, P.PDT_PRICE, P.PDT_DISCOUNT, P.PDT_COMPANY, P.PDT_IMG_FOLDER, P.PDT_IMG
+	FROM 
+		CART_TBL C INNER JOIN PRODUCT_TBL P
+	ON 
+		C.PDT_NUM = P.PDT_NUM
+	WHERE 
+		C.MEM_ID = #{mem_id}
+
+	</select>
+	
+	<select id="directOrderList" resultType="com.kmall.domain.CartOrderInfo">
+
+	SELECT 
+		PDT_NUM, PDT_NAME, PDT_IMG_FOLDER, PDT_IMG, PDT_PRICE, #{odr_amount} as CART_AMOUNT, PDT_DISCOUNT, PDT_COMPANY
+	FROM 
+		PRODUCT_TBL			
+	WHERE 
+		PDT_NUM = #{pdt_num}
+	
+	</select>
+</mapper>

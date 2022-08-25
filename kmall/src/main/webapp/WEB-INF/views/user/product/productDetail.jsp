@@ -29,18 +29,19 @@
 
  /* 상품후기 별 평점*/
       /*별평점 기본스타일*/
-      #star_rv_score a.rv_score {
+      .star_rv_score a.rv_score {
         font-size: 22px;
         text-decoration: none;
         color: lightgray;
       }
 
 	  /*별 평점 클릭시 jquery의  addClass(), removeClass() 메서드를 이용하여 사용할 css선택자.*/
-      #star_rv_score a.rv_score.on {
+      .star_rv_score a.rv_score.on {
 		color: red;
       }
+
       
-	 .mnd {
+	.buttonbox a{
 		background-color:#ededed;
 		border-radius:20px;
 		border:1px solid #ededed;
@@ -53,17 +54,28 @@
 		text-decoration:none;
 		text-shadow:0px 0px 0px #e1e2ed;
 		}
-	.mnd:hover{
-	text-decoration: none;
-	color: black;
+
+	.buttonbox a:hover{
+		text-decoration: none;
+		color: black;
 	}	
 	
-	.mnd {
+	.buttonbox a {
 		position:relative;
 		top:1px;
 	}
 	
-	#modify {
+	.modify {
+		position:relative;
+		top:1px;
+	}
+
+	
+	.modify {
+		margin-right: 3px;
+	}
+
+	.submit {
 		margin-right: 3px;
 	}
 	
@@ -73,7 +85,7 @@
 	}
 	
 	#viewdate{
-		margin-right: 80%;
+		margin-right: 70%;
 		font-size: .23em;
 		color:gray;
 	}
@@ -102,8 +114,8 @@
 
 <script id="reviewTemplate" type="text/x-handlebars-template">
     {{#each .}}
-    <div class="list-group">    
-      <div class="d-flex w-100 justify-content-between mt-3">
+	{{div rv_num}}
+      <div class="d-flex w-100 justify-content-between mt-3 style=height: 55px;">
           <h6>{{idfourdisplay mem_id}}</h6>
 		<small id="viewdate">{{prettifyDate rv_date_reg}}</small>
           <p>
@@ -113,11 +125,12 @@
       </div>
       <div class="d-flex w-100 justify-content-between">
         <p class="mb-1"><span class="rv_content">{{rv_content}}</span></p>
-        <p>
+        <p class="buttonbox">
         {{modifyview mem_id rv_num}}{{deleteview mem_id rv_num}}
         </p>
       </div>			   
     </div>
+</div>
     <hr style="margin-bottom: 0px; margin-top: 0px;">
   {{/each}}
   </script>
@@ -215,7 +228,7 @@
 				        <h5 class="text-bold">리뷰작성</h5>
 				        <div id="reviewbox">	 
 						<fieldset>
-					            <p id="star_rv_score">
+					            <p class="star_rv_score">
 					            	<a class="rv_score" style="margin-left: 13px;" href="#">★</a>
 					            	<a class="rv_score" href="#">★</a>
 					            	<a class="rv_score" href="#">★</a>
@@ -249,6 +262,15 @@
 
 $(function(){ 
 	
+	// 평점 별 클릭시 색상변경
+	$(".star_rv_score a.rv_score").on("click", function(e){
+
+		e.preventDefault();
+		
+		$(this).parent().children().removeClass("on"); // 별평점 <a>태그에 on 클래스선택자를 제거
+		$(this).addClass("on").prevAll("a").addClass("on")
+
+	});
 	
 	
 	
@@ -272,19 +294,8 @@ $(function(){
     });
 	
 });
-		 
-
-  
 		
-		// 평점 별 클릭시 색상변경
-	      $("#star_rv_score a.rv_score").on("click", function(e){
 
-	        e.preventDefault();
-	        
-	        $(this).parent().children().removeClass("on"); // 별평점 <a>태그에 on 클래스선택자를 제거
-	        $(this).addClass("on").prevAll("a").addClass("on")
-
-	      });
 		
 		
 		
@@ -298,7 +309,7 @@ $(function(){
 	        let pdt_num = $("#pdt_num").val();
 
 	        // 별평점이 5개
-	        $("#star_rv_score a.rv_score").each(function(index, item){
+	        $(".star_rv_score a.rv_score").each(function(index, item){
 	          if($(this).attr('class') == 'rv_score on') {
 	            rv_score += 1;
 	          }
@@ -339,7 +350,7 @@ $(function(){
 
 	              getPage(url);
 	              
-	              $("#star_rv_score a.rv_score").parent().children().removeClass("on");
+	              $(".star_rv_score a.rv_score").parent().children().removeClass("on");
 	              $("#rv_content").val("");
 
 	            }
@@ -438,12 +449,14 @@ $(function(){
 
 	      });
 
+
+
 	      // 아이디 4글자만 보여주기
 	      Handlebars.registerHelper("idfourdisplay", function(userid){
 
 	          return userid.substring(0, 4) + "*****";
 	      });
-	    
+	
 	      
 	    //로그인사용자와댓글작성자가 일치할 경우 수정,삭제버튼 표시
 	      Handlebars.registerHelper("modifyview", function(review_mem_id, rv_num) {
@@ -451,8 +464,7 @@ $(function(){
 	        let result = "";
 	        let login_mem_id = "${sessionScope.loginStatus.mem_id}";
 	        if (review_mem_id == login_mem_id) {
-	        	result = "<a id='modify' class='mnd' href='" + rv_num + "'>수정</a>";
-	          
+				result = "<a id='modify' class='modify' name='button_mnd' href='" + rv_num + "'>수정</a>";
 	        }
 
 	        return new Handlebars.SafeString(result);
@@ -464,13 +476,25 @@ $(function(){
 	      let result = "";
 	      let login_mem_id = "${sessionScope.loginStatus.mem_id}";
 	      if (review_mem_id == login_mem_id) {
-	        result = "<a id='delete' class='mnd' href='" + rv_num + "'>삭제</a>";
+	        result = "<a id='delete' class='delete' name='button_mnd' href='" + rv_num + "'>삭제</a>";
 	        
 	      }
 
 	      return new Handlebars.SafeString(result);
 
 	      });
+
+		 Handlebars.registerHelper("div", function(rv_num) {
+
+	      let result = "";
+
+
+	        result = "<div id='rid"+rv_num+"' data-rvnum='"+rv_num+"'>";
+
+	      return new Handlebars.SafeString(result);
+
+	      });
+
 	      
 	    //상품후기 페이징 함수
 	      let printReviewPaging = function(pageMaker, target) {
@@ -498,26 +522,24 @@ $(function(){
 	        target.append(pagingStr);
 	      }
 	    
-	    
-	      //상품후기 수정버튼 클릭
-	      $("#modify").on("click", function(){
-	        
-	        let rv_num = $("#rv_num").val();
+
+
+		  //변경된 폼에서 확인 누를시 수정
+		  $("#modifysubmit").on("click", function(){
+
+			let rv_num = $("#rv_num").val();
 	        let rv_score = 0;
-	        let rv_content = $("#rv_content").val();
+	        let rv_content = $(".rv_content").val();
+		 
+
 			
-	        $(".rv_content").html(
-	        	"<textarea class='rv_content'>"+ rv_content + "</textarea>"
-	        	
-	        )
-	        
-	        
-	        // 별평점이 5개
-	        $("#star_rv_score a.rv_score").each(function(index, item){
+			// 별평점이 5개
+	        $(".star_rv_score a.rv_score").each(function(index, item){
 	          if($(this).attr('class') == 'rv_score on') {
 	            rv_score += 1;
 	          }
 	        });
+			
 
 	        console.log("별 평점: " + rv_score );
 
@@ -554,18 +576,183 @@ $(function(){
 
 	              getPage(url);
 	              
-	              // 상품후기 대화상자 숨김.
-	              $("#reviewModal").modal('hide');
-	              $("#star_rv_score a.rv_score").parent().children().removeClass("on");
+	              $(".star_rv_score a.rv_score").parent().children().removeClass("on");
 	              $("#rv_content").val("");
 
 	            }
 	          }
 	        });
-	        
+
+		  });
+
+	//상품후기 목록에서 modify 버튼 클릭
+      $("div#reviewListResult").on("click", "p a.modify", function(e){
+
+        e.preventDefault();
+
+        let rv_num = $(this).attr("href"); // 상품후기번호
+
+        console.log("상품후기 번호: " + rv_num);
+
+		let rv_score = 0;
+	    
+
+
+		$('#rid'+rv_num+' span.rv_content').html(
+			"<textarea class='md_rv_content' name='rv_content' style='height: 34px; width: 500px;'></textarea>"
+		);
+
+		$('#rid'+rv_num+' p.buttonbox').html(
+			"<a class='submit' name='button_mnd' href='" + rv_num + "'>확인</a>"+
+			"<a class='cancle' name='button_mnd'>취소</a>"
+		);
+
+		$('#rid'+rv_num+' #viewstar').html(
+
+			'<fieldset>'+
+					'<p class="star_rv_score">'+
+						'<a class="rv_score" href="#">★</a>'+
+						'<a class="rv_score" href="#">★</a>'+
+						'<a class="rv_score" href="#">★</a>'+
+						'<a class="rv_score" href="#">★</a>'+
+						'<a class="rv_score" href="#">★</a>'+
+					'</p>'+
+			'</fieldset>'
+		);
+
+
+		  
+		//변경된 폼에서 취소버튼 클릭
+		 $(".cancle").on("click", function(e){
+
+	    
+			e.preventDefault();
+			
+			let reviewPage = 1;
+	     	 url = "/user/review/list/" + $("#pdt_num").val() + "/" + reviewPage;
+
+			 getPage(url);
+		
 	      });
 
+		  $("div#reviewListResult").on("click", "p a.delete", function(e){
+			
+			
+			e.preventDefault();
+     	});
+
+		  
+		  //변경된 폼에서 확인버튼 클릭
+		 $(".submit").on("click", function(e){
+
+			let rv_content = $(".rv_content").val();
+			e.preventDefault();
+
+			// 별평점 읽어오기
+			$(".star_rv_score a.rv_score").each(function(index, item){
+			if($(this).attr('class') == 'rv_score on') {
+				rv_score += 1;
+			}
+			});
+
+			console.log("별 평점: " + rv_score );
+			console.log("콘텐츠: " + rv_content);
+
+			if(rv_score == 0){
+			alert("별 평점을 선택해주세요.");
+			return;
+			}
+
+			if(rv_content == "") {
+			alert("상품후기를 입력하세요.");
+			return;
+			}
+
+			//자바스트립트 Object객체 구문
+			let data = { rv_num : rv_num, rv_content : rv_content, rv_score : rv_score };
+			
+			$.ajax({
+			url: '/user/review/modify',
+			/*컨트롤러에서 전송데이터 포맷이 설정되어 있으므로, 클라이언트에서 보내는 데이터의 MIME설정을 헤더에 추가해야 한다. */
+			headers: {
+				"Content-Type" : "application/json", "X-HTTP-Method-Override" : "PATCH"
+				},
+			type: 'patch',
+			dataType: 'text',
+			data : JSON.stringify(data), /* JSON 문자열데이타 */
+			success : function(result) {
+				if(result == "success") {
+				alert("수정완료");
+				
+				//상품후기 목록
+				//reviewPage = 1;
+				// "/user/review/list/상품코드/첫번째 페이지"
+				url = "/user/review/list/" + $("#pdt_num").val() + "/" + reviewPage;
+
+				getPage(url);
+				
+				// 상품후기 대화상자 숨김.
+				$("#star_rv_score a.rv_score").parent().children().removeClass("on");
+				$("#rv_content").val("");
+
+				}
+			}
+			});
+
+		
+	      });
+
+		// 평점 별 클릭시 색상변경
+	    $(".star_rv_score a.rv_score").on("click", function(e){
+
+			e.preventDefault();
+			
+			$(this).parent().children().removeClass("on"); // 별평점 <a>태그에 on 클래스선택자를 제거
+			$(this).addClass("on").prevAll("a").addClass("on")
+
+	      });
+		  
+      });
+	
+
+	  //상품후기 목록에서 삭제 버튼 클릭
+      $("div#reviewListResult").on("click", "p a.delete", function(e){
+
+        e.preventDefault();
+
+        let rv_num = $(this).attr("href"); // 상품후기번호
+
+        console.log("상품후기 번호: " + rv_num);
+
+        if(!confirm('상품후기' + rv_num + ' 번을 삭제하시겠습니까?')) return;
+      
+
+        $.ajax({
+          url: '/user/review/delete/' + rv_num, // 주소를 경로형식을 사용한다.
+          headers: {
+              "Content-Type" : "application/json", "X-HTTP-Method-Override" : "DELETE"
+            },
+          type: 'delete',
+          dataType: 'text',
+          success : function(result) {
+            if(result == "success") {
+              alert("상품후기가 삭제됨.");
+              //상품후기 목록
+              url = "/user/review/list/" + $("#pdt_num").val() + "/" + reviewPage;
+
+              getPage(url);
+
+            }
+          }
+        });
+
+
+      });
+
+
+
 </script>
+
         
 </body>
 </html>

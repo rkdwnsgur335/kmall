@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -81,6 +82,26 @@ public class ReviewController {
 	public ResponseEntity<String> modify(@RequestBody ReviewVO vo, HttpSession session){
 		
 		ResponseEntity<String> entity = null;
+		
+		String mem_id = ((MemberVO) session.getAttribute("loginStatus")).getMem_id();	
+		vo.setMem_id(mem_id);
+		
+		reviewservice.modify(vo);
+		
+		entity = new ResponseEntity<String>("success", HttpStatus.OK);
+		
+		return entity;
+	}
+	
+	//상품후기 삭제
+	@DeleteMapping(value = "delete/{rv_num}")
+	public ResponseEntity<String> delete(@PathVariable("rv_num") Integer rv_num){
+		
+		ResponseEntity<String> entity = null;
+		
+		reviewservice.delete(rv_num);
+		
+		entity = new ResponseEntity<String>("success", HttpStatus.OK);
 		
 		return entity;
 	}
