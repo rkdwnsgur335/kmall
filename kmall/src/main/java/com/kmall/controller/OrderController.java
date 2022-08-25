@@ -55,6 +55,14 @@ public class OrderController {
 			cartService.cart_add(vo);
 			
 		}
+		
+		// 폴더경로 역슬래쉬를 슬래쉬로 변환.
+		for(int i=0; i<orderInfoList.size(); i++) {
+			String pdt_img_folder = orderInfoList.get(i).getPdt_img_folder().replace("\\", "/"); // File.serparator 운영체제 경로구분자
+			orderInfoList.get(i).setPdt_img_folder(pdt_img_folder);
+		}
+		
+		model.addAttribute("cartOrderList", orderInfoList);
 	}
 	
 	

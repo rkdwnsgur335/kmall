@@ -260,7 +260,19 @@
 
 <script>
 
-$(function(){ 
+$(function(){
+	
+    // 직접구매 버튼 클릭시. non-ajax
+    $("#btnOrder").on("click", function(){
+
+      let pdt_num = $("#pdt_num").val(); // 구매상품코드
+      let odr_amount = $("#pdt_amount").val(); // 구매수량
+
+      let url = "/user/order/orderListInfo?pdt_num="+pdt_num+"&odr_amount="+odr_amount+"&type=direct";
+      //console.log("직접구매 주소: " + url);
+      location.href = url;
+
+    });
 	
 	// 평점 별 클릭시 색상변경
 	$(".star_rv_score a.rv_score").on("click", function(e){
@@ -745,6 +757,9 @@ $(function(){
             }
           }
         });
+        
+        
+        
 
 
       });

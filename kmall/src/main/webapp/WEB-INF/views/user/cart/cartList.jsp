@@ -280,6 +280,12 @@
 
 			location.href = "/user/cart/cart_empty";
 		});
+		
+		//주문하기 버튼클릭
+		$("#btnOrder").on("click", function() {
+			let type = "cartOrder";
+			location.href = "/user/order/orderListInfo?type=" + type;
+		});
 
 
     }); // ready이벤트 끝부분
