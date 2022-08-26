@@ -61,5 +61,14 @@
 	     WHERE CART_CODE = #{cart_code}
 
 	</delete>
+	
+	<delete id="cart_empty" parameterType="string">
+	
+		DELETE FROM
+			CART_TBL
+		WHERE
+			MEM_ID = #{mem_id}
+	
+	</delete>
 
 </mapper>

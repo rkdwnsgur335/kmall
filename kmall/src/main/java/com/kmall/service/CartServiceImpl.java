@@ -49,5 +49,11 @@ public class CartServiceImpl implements CartService {
 		
 	}
 
+	@Override
+	public void cart_empty(String mem_id) {
+		// TODO Auto-generated method stub
+		cartmapper.cart_empty(mem_id);
+	}
+
 	
 }

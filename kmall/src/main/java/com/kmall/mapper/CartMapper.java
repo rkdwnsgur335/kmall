@@ -23,4 +23,7 @@ public interface CartMapper {
 	
 	//장바구니 삭제
 	void deleteselect(CartVO vo);
+	
+	//장바구니 비우기
+	void cart_empty(String mem_id);
 }

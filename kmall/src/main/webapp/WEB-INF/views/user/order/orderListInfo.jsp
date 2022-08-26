@@ -76,7 +76,7 @@
 					    <tr>
 					      <th scope="col">상품</th>
 					      <th scope="col">수량</th>
-					      <th scope="col">적립</th>
+					      <th scope="col">할인율</th>
 					      <th scope="col">주문금액</th>
 					    </tr>
 					  </thead>
@@ -87,7 +87,7 @@
 					    <tr>
 					      <td scope="row">
 					      	<a class="move" href="${cartOrderInfo.pdt_num }">
-					      		<img src="/user/order/displayFile?folderName=${cartOrderInfo.pdt_img_folder }&fileName=s_${cartOrderInfo.pdt_img }" 
+					      		<img src="/user/order/displayFile?folderName=${cartOrderInfo.pdt_img_folder }&fileName=${cartOrderInfo.pdt_img }" 
 					      		alt="" style="width: 80px;height: 80px;" onerror="this.onerror=null; this.src='/image/no_images.png'">
 					      		<c:out value="${cartOrderInfo.pdt_name }"/>
 					      	</a>
@@ -95,7 +95,9 @@
 					      <td>
 					      	 <c:out value="${cartOrderInfo.cart_amount }" /> 개
 					      </td>
-					      <td><c:out value="${sessionScope.loginStatus.mem_point }" /></td>	      
+					  	  <td>
+							<span style="padding-left: 20px;">0</span>
+					      </td>
 					      <td><span class="unitprice"><fmt:formatNumber type="number" maxFractionDigits="3" value="${price }" ></fmt:formatNumber></span></td>				      
 					    </tr>
 					      <c:set var="sum" value="${sum + price}"></c:set>
@@ -126,9 +128,9 @@
 						    </div>
 						  </div>
 						  <div class="form-group row">
-						    <label for="mem_email" class="col-sm-2 col-form-label">전자우편</label>
+						    <label for="mem_id" class="col-sm-2 col-form-label">email</label>
 						    <div class="col-sm-10">
-						      <input type="text" class="form-control" id="s_mem_email" value="${sessionScope.loginStatus.mem_email }" readonly>
+						      <input type="text" class="form-control" id="s_mem_id" value="${sessionScope.loginStatus.mem_id }" readonly>
 						    </div>
 						  </div>
 						  <div class="form-group row">
