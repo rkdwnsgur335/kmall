@@ -174,6 +174,9 @@ public class OrderController {
 	@ResponseBody
 	@GetMapping("/displayFile")
 	public ResponseEntity<byte[]> displayFile(String folderName, String fileName){
+		
+		log.info("폴더이름: " + folderName);
+		log.info("파일이름: " + fileName);
 
 		//이미지를 바이트 배열로 읽어오는 작업
 		return UploadFileUtils.getFile(uploadPath, folderName + "\\" + fileName);
