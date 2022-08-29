@@ -176,29 +176,21 @@ let idjoin=false;
 		
 	    $(document).ready(function(){
 	    	
-	    	$("#submitbtn").on("click", function(){
+	    	$("#submitbtn").on("click", function(e){
 				
 				if($("#mem_id").val() == "") {
+                    e.preventDefault();
 					alert("아이디를 입력하세요");
 					$("#mem_id").focus();
 					return;
-				}
+				}else if(idjoin == false){
+                    alert("이메일 형식으로 ID를 입력해주세요.");
+                    e.preventDefault();
+                }
 			
 			});
 	    	
 	    	
-	    	
-
-	        $('#submitbtn').on('click',function(e){
-
-                if(idjoin == false){
-                    alert("이메일 형식으로 ID를 입력해주세요.");
-                    e.preventDefault();
-                }
-
-                console.log("통과");
-
-	        });
 	});
 	    
 	    document.querySelector("#mem_psw").addEventListener("input", function(){

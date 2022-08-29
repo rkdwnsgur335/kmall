@@ -86,7 +86,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </nav>
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4" style="margin-top: 5%"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-      <h2></h2>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
 		      <div class="container">
@@ -122,7 +121,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <div class="row">
       	<div class="col-12">
       		<nav aria-label="...">
-			  <ul class="pagination">
+			  <ul class="pagination" style="margin-left: 23%;">
 			    <!-- 이전표시 -->
 			    <c:if test="${pageMaker.prev }">
 				    <li class="page-item">

@@ -65,6 +65,29 @@ public class UserProductController {
 		
 	}
 	
+	//메인 페이지 상품 리스트
+	@GetMapping("/index")
+	public void index(@ModelAttribute("cri") Criteria cri, Model model) {
+		
+		List<ProductVO> productList = proservice.getProductPage(cri);
+		
+		
+		cri.setAmount(9);
+		
+		for(int i=0; i<productList.size(); i++) {
+			String pdt_img_folder = productList.get(i).getPdt_img_folder().replace("\\", "/"); // File.serparator 운영체제 경로구분자
+			productList.get(i).setPdt_img_folder(pdt_img_folder);
+		}
+		
+	
+		
+		
+		// 페이징쿼리에 의한 상품목록
+		model.addAttribute("productList", productList); // 상품정보
+		model.addAttribute("cateList", proservice.CateBrand()); // 브랜드 이름
+		
+	}
+	
 	
 	//상품리스트 이미지 보여주기
 	@ResponseBody
