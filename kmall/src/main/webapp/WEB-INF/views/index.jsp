@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <!doctype html>
 <html lang="en">
@@ -159,82 +160,74 @@
 
     <hr class="featurette-divider">
 	
-	<div class="container">
-    
-		<div class="card-deck card-group-scroll">
-		  <div class="card">
-		    <img class="card-img-top" src="https://kream-phinf.pstatic.net/MjAyMjA3MjdfMjM4/MDAxNjU4ODg0ODEyMTQ5.Q9sUk60eFhMmHeW3edP8Oh4Q24FyHuqUI4S5q7uPzzEg.C8IjaCW31FLzfoU9mUMOiZphy13vOq_SbhDwSpdS24Ug.PNG/a_66a34970a50443fa97011c76a219e963.png?type=m_webp"  data-src="holder.js/100px180/" />
-		    <div class="card-body">
-		      <h5 class="card-title">Card title</h5>
-		      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-		      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+<div class="container">
+				<div class="row">
+		        <c:forEach items="${productList }" var="productVO" varStatus="status">
+		        <div class="col-md-4">
+		          <div class="card mb-4 border-0">
+		            <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+		            <!-- 상품이미지 -->
+		            <a class="move" href="${productVO.pdt_num }">
+		            	<img src="/user/product/displayFile?folderName=${productVO.pdt_img_folder }&fileName=${productVO.pdt_img }" 
+			      			alt="" class="bd-placeholder-img card-img-top" width="100%" style="background-color: white;">
+			      	</a>
+		
+		            <div class="card-body">
+		              <p class="card-text">
+		              	  ${cateList[status.index].cate_name}<br>
+			              ${productVO.pdt_name }<br>
+			              <fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${productVO.pdt_price }"></fmt:formatNumber>
+			              <br>
+		              </p>
+		            </div>
+		          </div>
+		        </div>
+		        </c:forEach>
+		      </div>
 		    </div>
-		  </div>
-		  <div class="card">
-		    <img class="card-img-top" src="https://kream-phinf.pstatic.net/MjAyMjA3MjVfNzcg/MDAxNjU4NzI5NzQwOTU5.aGlzho5scMJ7EH2zXqe2j8Jy0Py2bmLZ14FbsNvkxkEg.KaMGJJpNF0xJjffQVQL-xJ6XzjMT-SqdIdzTj3sEMwAg.PNG/a_900a080a687e4562b00204a1b1ce5033.png?type=m_webp"  data-src="holder.js/100px180/" />
-		    <div class="card-body">
-		      <h5 class="card-title">Card title</h5>
-		      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-		      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-		    </div>
-		  </div>
-		  <div class="card">
-		    <img class="card-img-top" src="https://kream-phinf.pstatic.net/MjAyMTA3MjhfMjIg/MDAxNjI3NDQxMDA1NjE5.HOgIYywGZaaBJDqUzx2OnX9HAxoOWPvuWHqUn_LZGcgg.VYIuOfA5_GgjBGRowv6dmQuAOPtUvmAxbGpOyUCOCtYg.PNG/p_9d8ed1a74d2540ab9842e63363607bf4.png?type=m_webp"  data-src="holder.js/100px180/" />
-		    <div class="card-body">
-		      <h5 class="card-title">Card title</h5>
-		      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-		      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-		    </div>
-		  </div>
-		  <div class="card">
-		    <img class="card-img-top" src="https://kream-phinf.pstatic.net/MjAyMjA3MjFfMTkx/MDAxNjU4Mzc4NTM4MjMy.qfto-0YP1f6v-VhrShUzwqfSaBH8TOcwkArlDQA6QeMg.Q4W_RuAyw5xbH5_joe7taOoDMywE3JFKlLmz6cmz8hMg.PNG/a_b8acf1e9434245368bf87c2f42c5d983.png?type=m_webp"  data-src="holder.js/100px180/" />
-		    <div class="card-body">
-		      <h5 class="card-title">Card title</h5>
-		      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-		      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-		    </div>
-		  </div>
-		  <div class="card">
-		    <img class="card-img-top" src="https://kream-phinf.pstatic.net/MjAyMjA3MjdfMjM4/MDAxNjU4ODg0ODEyMTQ5.Q9sUk60eFhMmHeW3edP8Oh4Q24FyHuqUI4S5q7uPzzEg.C8IjaCW31FLzfoU9mUMOiZphy13vOq_SbhDwSpdS24Ug.PNG/a_66a34970a50443fa97011c76a219e963.png?type=m_webp"  data-src="holder.js/100px180/" />
-		    <div class="card-body">
-		      <h5 class="card-title">Card title</h5>
-		      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-		      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-		    </div>
-		  </div>
-		</div>
-
-
-	</div>
-
-
-    <hr class="featurette-divider">
-
-    <div class="row featurette">
-      <div class="col-md-7 order-md-2">
-        <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
-        <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work with some actual real-world content in place.</p>
+		    
+		    
+	<div class="row">
+      	<div class="col-12">
+      		<nav aria-label="...">
+			  <ul class="pagination">
+			    <!-- 이전표시 -->
+			    <c:if test="${pageMaker.prev }">
+				    <li class="page-item">
+				      <a class="page-link" href="${pageMaker.startPage - 1 }">Previous</a>
+				    </li>
+			    </c:if>
+			    
+			    <!-- 페이지번호 표시.  1  2  3  4  5 -->
+			    
+			    <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="num" >
+			    	<li class='page-item ${pageMaker.cri.pageNum == num ? "active": "" }'><a class="page-link" href="${num}">${num}</a></li>
+			    </c:forEach>
+			    <!-- 
+			    <li class="page-item active" aria-current="page">
+			      <span class="page-link">2</span>
+			    </li>
+			    <li class="page-item"><a class="page-link" href="#">3</a></li>
+			     -->
+			    <!-- 다음표시 -->
+			    <c:if test="${pageMaker.next }">
+				    <li class="page-item">
+				      <a class="page-link" href="${pageMaker.endPage + 1 }">Next</a>
+				    </li>
+			    </c:if>
+				
+			  </ul>
+			  <!--1)페이지 번호 클릭시 2)상품수정버튼 클릭시 3)상품삭제버튼 클릭시-->
+				<form id="actionForm" action="productDetail" method="get">
+					<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+					<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+					<input type="hidden" name="type" value="${pageMaker.cri.type}">
+					<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+				</form>
+			</nav>
+      	</div>
       </div>
-      <div class="col-md-5 order-md-1">
-        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
-
-      </div>
-    </div>
-
-    <hr class="featurette-divider">
-
-    <div class="row featurette">
-      <div class="col-md-7">
-        <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-        <p class="lead">And yes, this is the last block of representative placeholder content. Again, not really intended to be actually read, simply here to give you a better view of what this would look like with some actual content. Your content.</p>
-      </div>
-      <div class="col-md-5">
-        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
-
-      </div>
-    </div>
-
-    <hr class="featurette-divider">
+		    
 
     <!-- /END THE FEATURETTES -->
 
@@ -248,7 +241,31 @@
   </footer>
 </main>
 
+<script>
+$(function(){
+	
+    //actionForm 참조 : 1)페이지번호 클릭 2)검색버튼 클릭
+    let actionForm = $("#actionForm");
+	
+    //상품이미지, 상품제목 클릭
+    $("div.container a.move").on("click", function(e){
+      e.preventDefault();
 
+      let pdt_num = $(this).attr("href");
+		let cate_code = $(this).attr("href");
+
+      actionForm.attr("method", "get");
+      actionForm.attr("action", "/user/product/productDetail");
+
+      actionForm.append("<input type='hidden' name='pdt_num' value='" + pdt_num + "'>");
+      actionForm.submit();
+
+    });
+    
+    
+});
+
+</script>
       
   </body>
 </html>

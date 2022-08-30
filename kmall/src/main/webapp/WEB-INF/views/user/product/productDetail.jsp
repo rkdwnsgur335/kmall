@@ -657,7 +657,7 @@ $(function(){
 		  //변경된 폼에서 확인버튼 클릭
 		 $(".submit").on("click", function(e){
 
-			let rv_content = $(".rv_content").val();
+			let rv_content = $(".md_rv_content").val();
 			e.preventDefault();
 
 			// 별평점 읽어오기
