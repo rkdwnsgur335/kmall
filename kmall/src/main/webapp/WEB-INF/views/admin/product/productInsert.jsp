@@ -91,6 +91,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						    <select class="form-control" name="pdt_gender" id="SecondCategory">
 					    			<option value="남성">남성</option>
 					    			<option value="여성">여성</option>
+					    			<option value="혼성">혼성</option>
 						    </select>
 						 </div>
 					  </div>

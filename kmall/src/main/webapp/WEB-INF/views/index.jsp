@@ -139,7 +139,7 @@
     <div class="row">
       <div class="col-lg-4">
 		<a href="#"><img id="cardimg" src="https://kream-phinf.pstatic.net/MjAyMjA3MDZfMTgg/MDAxNjU3MDU5MTk2NTI3.ExlmPt2zfLCyEul39fWHwWCN_viumdk705L1cd-C1o8g.z2u7BBofKNM590ixdEhnI55GCmZ02cGSmAiRJy-kvtsg.JPEG/a_65850eadc0dd44b5be6b5cd56be60751.jpg_webp" class="bd-placeholder-img rounded-circle" width="140" height="140"></a>
-        <p>여성추천</p>
+        <p>여성</p>
       </div><!-- /.col-lg-4 -->
       
       
@@ -151,7 +151,7 @@
      
       <div class="col-lg-4">
        <a href="#"><img id="cardimg" src="https://kream-phinf.pstatic.net/MjAyMjA3MDZfMjg2/MDAxNjU3MDU5MTgxODY4.xxkBGO6bjeDTLhjO5s69bwX9Ydi0IVHrB-TOTWJJVx4g._qkxsrL2HGThsG-rY83N0zwCU1OHzYXshfrjU3LqJ-og.JPEG/a_4fb0df8b2fc64bd1a2df8509d2eb5a3c.jpg_webp" class="bd-placeholder-img rounded-circle" width="140" height="140"></a>
-        <p>남성추천</p>
+        <p>남성</p>
       </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->
 
