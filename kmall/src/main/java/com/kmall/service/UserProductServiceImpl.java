@@ -42,6 +42,12 @@ public class UserProductServiceImpl implements UserProductService {
 		return userpromapper.getProductPageall(cri);
 	}
 
+	@Override
+	public List<ProductVO> getProductPagegender(Integer pdt_gender, Criteria cri) {
+		// TODO Auto-generated method stub
+		return userpromapper.getProductPagegender(pdt_gender, cri);
+	}
+
 	
 
 	

@@ -65,6 +65,38 @@ public class UserProductController {
 		
 	}
 	
+	
+	//상품리스트. 페이징기능추가.(검색기능 제외)
+		@GetMapping("/productList/{pdt_gender}") // REST API 개발에서 사용하는 주소형태.
+		public String productList(@PathVariable("pdt_gender") Integer pdt_gender, @ModelAttribute("cri") Criteria cri, Model model) {
+			
+			
+			cri.setAmount(9); // 10 -> 9변경
+			
+			List<ProductVO> productList = proservice.getProductPagegender(pdt_gender, cri);
+			
+			log.info("성별정보: " + pdt_gender);
+			
+			
+			// 윈도우 운영체제 경로구분자 \ (역슬래쉬).
+			// 날짜폴더명의 \를 /로 변환하는 작업. \가 클라이언트에서 서버로 보내지는 데이터로 사용이 안된다.
+			for(int i=0; i<productList.size(); i++) {
+				String pdt_img_folder = productList.get(i).getPdt_img_folder().replace("\\", "/"); // File.serparator 운영체제 경로구분자
+				productList.get(i).setPdt_img_folder(pdt_img_folder);
+			}
+			
+			
+			// 1)페이징쿼리에 의한 상품목록
+			model.addAttribute("productList", productList);
+			
+			// [prev] 1	 2	3	4	5  [next]
+			int totalCount = proservice.getProductPageall(cri);
+			// 2) 페이지 표시
+			model.addAttribute("pageMaker", new PageDTO(cri, totalCount));
+			
+			return "/user/product/productList";
+		}
+	
 	//메인 페이지 상품 리스트
 	@GetMapping("/index")
 	public void index(@ModelAttribute("cri") Criteria cri, Model model) {

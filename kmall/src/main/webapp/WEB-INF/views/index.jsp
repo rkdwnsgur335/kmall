@@ -136,21 +136,21 @@
   <div class="container marketing">
 
     <!-- Three columns of text below the carousel -->
-    <div class="row">
+    <div class="row" id="female">
       <div class="col-lg-4">
-		<a href="#"><img id="cardimg" src="https://kream-phinf.pstatic.net/MjAyMjA3MDZfMTgg/MDAxNjU3MDU5MTk2NTI3.ExlmPt2zfLCyEul39fWHwWCN_viumdk705L1cd-C1o8g.z2u7BBofKNM590ixdEhnI55GCmZ02cGSmAiRJy-kvtsg.JPEG/a_65850eadc0dd44b5be6b5cd56be60751.jpg_webp" class="bd-placeholder-img rounded-circle" width="140" height="140"></a>
-        <p>여성</p>
+		<a href=#><img src="https://kream-phinf.pstatic.net/MjAyMjA3MDZfMTgg/MDAxNjU3MDU5MTk2NTI3.ExlmPt2zfLCyEul39fWHwWCN_viumdk705L1cd-C1o8g.z2u7BBofKNM590ixdEhnI55GCmZ02cGSmAiRJy-kvtsg.JPEG/a_65850eadc0dd44b5be6b5cd56be60751.jpg_webp" class="bd-placeholder-img rounded-circle" width="140" height="140"></a>
+		<p>여성</p>
       </div><!-- /.col-lg-4 -->
       
       
       <div class="col-lg-4">
-        <a href="#"><img id="cardimg" src="https://kream-phinf.pstatic.net/MjAyMjA3MThfMjUz/MDAxNjU4MTIwNzM3NDA3.iWB06qnZY0ZYW2TDD4-H0LIIp7eYuvEH3QJQyjSq0Egg._YiJauFB1RyQAL6LH8qIqClGX6zSXGrWSh3Yc6HzCmAg.JPEG/a_760b35b9bb754ab4961e1b130c9ffbb7.jpg_webp" class="bd-placeholder-img rounded-circle" width="140" height="140"></a>
+        <a href="#"><img id="new" src="https://kream-phinf.pstatic.net/MjAyMjA3MThfMjUz/MDAxNjU4MTIwNzM3NDA3.iWB06qnZY0ZYW2TDD4-H0LIIp7eYuvEH3QJQyjSq0Egg._YiJauFB1RyQAL6LH8qIqClGX6zSXGrWSh3Yc6HzCmAg.JPEG/a_760b35b9bb754ab4961e1b130c9ffbb7.jpg_webp" class="bd-placeholder-img rounded-circle" width="140" height="140"></a>
         <p>NEW</p>
      </div><!-- /.col-lg-4 -->
      
      
       <div class="col-lg-4">
-       <a href="#"><img id="cardimg" src="https://kream-phinf.pstatic.net/MjAyMjA3MDZfMjg2/MDAxNjU3MDU5MTgxODY4.xxkBGO6bjeDTLhjO5s69bwX9Ydi0IVHrB-TOTWJJVx4g._qkxsrL2HGThsG-rY83N0zwCU1OHzYXshfrjU3LqJ-og.JPEG/a_4fb0df8b2fc64bd1a2df8509d2eb5a3c.jpg_webp" class="bd-placeholder-img rounded-circle" width="140" height="140"></a>
+       <a href="#"><img id="male" src="https://kream-phinf.pstatic.net/MjAyMjA3MDZfMjg2/MDAxNjU3MDU5MTgxODY4.xxkBGO6bjeDTLhjO5s69bwX9Ydi0IVHrB-TOTWJJVx4g._qkxsrL2HGThsG-rY83N0zwCU1OHzYXshfrjU3LqJ-og.JPEG/a_4fb0df8b2fc64bd1a2df8509d2eb5a3c.jpg_webp" class="bd-placeholder-img rounded-circle" width="140" height="140"></a>
         <p>남성</p>
       </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->
@@ -252,7 +252,7 @@ $(function(){
       e.preventDefault();
 
       let pdt_num = $(this).attr("href");
-		let cate_code = $(this).attr("href");
+	  let cate_code = $(this).attr("href");
 
       actionForm.attr("method", "get");
       actionForm.attr("action", "/user/product/productDetail");
@@ -261,6 +261,17 @@ $(function(){
       actionForm.submit();
 
     });
+    
+    
+    //2차 카테고리 클릭.
+    $("#female").on("click", "a", function(e){
+      e.preventDefault();  // <a href=""></a> 링크기능제거, <input type="submit"> 전송기능 제거
+
+      let pdt_gender = 2;
+      // get방식으로 특수문자 데이터가 서버로 보내질때 문제되는 경우 : 인코딩할 것.  검색어 : mdn url 인코딩
+      location.href = "/user/product/productList/" + pdt_gender;
+    });
+    
     
     
 });

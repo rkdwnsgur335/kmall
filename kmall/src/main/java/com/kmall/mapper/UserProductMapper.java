@@ -2,6 +2,8 @@ package com.kmall.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.kmall.domain.CategoryVO;
 import com.kmall.domain.ProductVO;
 import com.kmall.dto.Criteria;
@@ -11,6 +13,8 @@ public interface UserProductMapper {
 	List<CategoryVO> CateBrand(); // 브랜드 카테고리
 
 	List<ProductVO> getProductPage(Criteria cri); // 카테고리로 상품정보 받아오기
+	
+	List<ProductVO> getProductPagegender(@Param("pdt_gender") Integer pdt_gender ,@Param("cri") Criteria cri);
 	
 	ProductVO getProductByNum(Integer pdt_num); // 상품 상세정보
 	
